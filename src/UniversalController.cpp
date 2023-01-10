@@ -5,6 +5,7 @@
 #include "radios/radios.h"
 #include "sound/sound.h"
 #include "power/power.h"
+#include "menu/menu.h"
 
 
 
@@ -106,6 +107,134 @@ int UniversalController::triSwAState()
 int UniversalController::triSwBState()
 {
   return tri_sw_b_state;
+}
+
+
+
+
+bool UniversalController::sw1SwitchFlag()
+{
+  return sw_1_switched;
+}
+
+
+
+
+bool UniversalController::sw2SwitchFlag()
+{
+  return sw_2_switched;
+}
+
+
+
+
+bool UniversalController::sw3SwitchFlag()
+{
+  return sw_3_switched;
+}
+
+
+
+
+bool UniversalController::sw4SwitchFlag()
+{
+  return sw_4_switched;
+}
+
+
+
+
+bool UniversalController::sw5SwitchFlag()
+{
+  return sw_5_switched;
+}
+
+
+
+
+bool UniversalController::sw6SwitchFlag()
+{
+  return sw_6_switched;
+}
+
+
+
+
+bool UniversalController::triSwASwitchFlag()
+{
+  return tri_sw_a_switched;
+}
+
+
+
+
+bool UniversalController::triSwBSwitchFlag()
+{
+  return tri_sw_b_switched;
+}
+
+
+
+
+void UniversalController::clearsw1SwitchFlag()
+{
+  sw_1_switched = false;
+}
+
+
+
+
+void UniversalController::clearsw2SwitchFlag()
+{
+  sw_2_switched = false;
+}
+
+
+
+
+void UniversalController::clearsw3SwitchFlag()
+{
+  sw_3_switched = false;
+}
+
+
+
+
+void UniversalController::clearsw4SwitchFlag()
+{
+  sw_4_switched = false;
+}
+
+
+
+
+void UniversalController::clearsw5SwitchFlag()
+{
+  sw_5_switched = false;
+}
+
+
+
+
+void UniversalController::clearsw6SwitchFlag()
+{
+  sw_6_switched = false;
+}
+
+
+
+
+void UniversalController::cleartriSwASwitchFlag()
+{
+  tri_sw_a_switched = false;
+}
+
+
+
+
+void UniversalController::cleartriSwBSwitchFlag()
+{
+  tri_sw_b_switched = false;
 }
 
 

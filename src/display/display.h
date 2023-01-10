@@ -1,8 +1,5 @@
 #pragma once
 #include "Arduino.h"
-#include "Adafruit_GFX.h"
-#include "SPI.h"
-#include "Wire.h"
 #include "Adafruit_ILI9341.h"
 #include "XPT2046_Touchscreen.h"
 #include "TeensyTimerTool.h"
@@ -15,92 +12,42 @@ using namespace TeensyTimerTool;
 
 
 
-const float TOUCH_FREQ   = 30; // Hz
-const float TOUCH_PERIOD = 1.0 / TOUCH_FREQ; // s
+extern const float TOUCH_FREQ;
+extern const float TOUCH_PERIOD;
 
-const int DISP_CS_PIN = 10;
-const int DC_PIN      = 9;
-const int T_CS_PIN    = 8;
-const int T_IRQ_PIN   = 2;
+extern const int DISP_CS_PIN;
+extern const int DC_PIN;
+extern const int T_CS_PIN;
+extern const int T_IRQ_PIN;
 
-volatile const int TOUCH_TIME_THRESH = 0.2 * 1e6; // us
-
-
-
-
-PeriodicTimer       touchTimer;
-XPT2046_Touchscreen ts(T_CS_PIN, T_IRQ_PIN);
-Adafruit_ILI9341    tft(DISP_CS_PIN, DC_PIN);
-TS_Point            ts_point;
+extern volatile const int TOUCH_TIME_THRESH;
 
 
 
 
-volatile long time_touched  = 0;
-volatile bool touch_handled = true;
+extern PeriodicTimer       touchTimer;
+extern XPT2046_Touchscreen ts;
+extern Adafruit_ILI9341    tft;
+extern TS_Point            ts_point;
 
 
 
 
-void enableTS()    { digitalWriteFast(DISP_CS_PIN, HIGH);  digitalWriteFast(T_CS_PIN, LOW);  }
-void enableTFT()   { digitalWriteFast(DISP_CS_PIN, LOW);   digitalWriteFast(T_CS_PIN, HIGH); }
-void disableTS()   { digitalWriteFast(T_CS_PIN,    HIGH);                                    }
-void disableTFT()  { digitalWriteFast(DISP_CS_PIN, HIGH);                                    }
-void disableDisp() { digitalWriteFast(DISP_CS_PIN, HIGH);  digitalWriteFast(T_CS_PIN, HIGH); }
-
-FASTRUN void __attribute__((weak)) touch()
-{
-    if (ts.tirqTouched())
-    {
-        enableTS();
-      
-        if (ts.touched())
-        {
-            long currTime = micros();
-
-            if ((currTime - time_touched) >= TOUCH_TIME_THRESH)
-            {
-                ts_point      = ts.getPoint();
-                touch_handled = false;
-                time_touched  = currTime;
-                
-                Serial.print("Pressure = ");
-                Serial.print(ts_point.z);
-                Serial.print(", x = ");
-                Serial.print(ts_point.x);
-                Serial.print(", y = ");
-                Serial.print(ts_point.y);
-                Serial.println();
-            }
-            else
-            {
-                ts.getPoint();
-            }
-        }
-        
-        disableTS();
-    }
-}
+extern volatile long time_touched;
+extern volatile bool touch_handled;
 
 
 
 
-void setupDisplay()
-{
-    pinMode(DISP_CS_PIN, OUTPUT);
-    pinMode(T_CS_PIN, OUTPUT);
+void enableTS();
+void enableTFT();
+void disableTS();
+void disableTFT();
+void disableDisp();
 
-    enableTS();
-    ts.begin();
-    
-    enableTFT();
-    tft.begin();
-    tft.fillScreen(ILI9341_BLACK);
+FASTRUN void __attribute__((weak)) whenTouched();
 
-    disableDisp();
-
-    touchTimer.begin(touch, TOUCH_PERIOD * 1e6);
-}
+void setupDisplay();
 
 
 

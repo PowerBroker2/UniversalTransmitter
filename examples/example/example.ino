@@ -54,6 +54,16 @@ void testBuddy()
 
 void testSwitches()
 {
+  Serial.print("SW 1 Was Switched: "); Serial.println(myController.sw1SwitchFlag());
+  Serial.print("SW 2 Was Switched: "); Serial.println(myController.sw2SwitchFlag());
+  Serial.print("SW 3 Was Switched: "); Serial.println(myController.sw3SwitchFlag());
+  Serial.print("SW 4 Was Switched: "); Serial.println(myController.sw4SwitchFlag());
+  Serial.print("SW 5 Was Switched: "); Serial.println(myController.sw5SwitchFlag());
+  Serial.print("SW 6 Was Switched: "); Serial.println(myController.sw6SwitchFlag());
+  
+  Serial.print("Tri SW A Was Switched: "); Serial.println(myController.triSwASwitchFlag());
+  Serial.print("Tri SW B Was Switched: "); Serial.println(myController.triSwBSwitchFlag());
+
   Serial.print("SW 1 State: "); Serial.println(myController.sw1State());
   Serial.print("SW 2 State: "); Serial.println(myController.sw2State());
   Serial.print("SW 3 State: "); Serial.println(myController.sw3State());
@@ -61,10 +71,20 @@ void testSwitches()
   Serial.print("SW 5 State: "); Serial.println(myController.sw5State());
   Serial.print("SW 6 State: "); Serial.println(myController.sw6State());
   
-  Serial.print("SW 1 State: "); Serial.println(myController.triSwAState());
-  Serial.print("SW 1 State: "); Serial.println(myController.triSwBState());
+  Serial.print("Tri SW A State: "); Serial.println(myController.triSwAState());
+  Serial.print("Tri SW B State: "); Serial.println(myController.triSwBState());
 
   Serial.println();
+
+  myController.clearsw1SwitchFlag();
+  myController.clearsw2SwitchFlag();
+  myController.clearsw3SwitchFlag();
+  myController.clearsw4SwitchFlag();
+  myController.clearsw5SwitchFlag();
+  myController.clearsw6SwitchFlag();
+  
+  myController.cleartriSwASwitchFlag();
+  myController.cleartriSwBSwitchFlag();
 }
 
 
