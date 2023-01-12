@@ -145,6 +145,17 @@ void setupSwitches()
 	pinMode(TRI_SW_A_PIN, INPUT_PULLUP);
 	pinMode(TRI_SW_B_PIN, INPUT_PULLUP);
 
+	delay(1); // SW 4 doesn't initialize correctly without this for some reason
+
+	sw_1_state = digitalReadFast(SW_1_PIN);
+	sw_2_state = digitalReadFast(SW_2_PIN);
+	sw_3_state = digitalReadFast(SW_3_PIN);
+	sw_4_state = digitalReadFast(SW_4_PIN);
+	sw_5_state = digitalReadFast(SW_5_PIN);
+	sw_6_state = digitalReadFast(SW_6_PIN);
+
+	tri_sw_a_state = digitalReadFast(TRI_SW_A_PIN);
+	tri_sw_b_state = digitalReadFast(TRI_SW_B_PIN);
 	
 	attachInterrupt(SW_1_PIN, SW1ISR, CHANGE);
 	attachInterrupt(SW_2_PIN, SW2ISR, CHANGE);
