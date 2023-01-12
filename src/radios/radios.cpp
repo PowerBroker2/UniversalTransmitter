@@ -16,9 +16,9 @@
 /*
 * ****************** NRF24 ******************
 */
-const int NRF_CE_PIN  = 29;
-const int NRF_CSN_PIN = 30;
-const int NRF_IRQ_PIN = 39;
+extern const int NRF_CE_PIN  = 29;
+extern const int NRF_CSN_PIN = 30;
+extern const int NRF_IRQ_PIN = 39;
 
 
 
@@ -28,8 +28,13 @@ RF24 radio(NRF_CE_PIN, NRF_CSN_PIN);
 
 
 
+void enableNRF()  { digitalWriteFast(NRF_CE_PIN, LOW);  }
+void disableNRF() { digitalWriteFast(NRF_CE_PIN, HIGH); }
+
 FASTRUN void __attribute__((weak)) NRFISR()
 {
+    enableNRF();
+
     // print IRQ status and all masking flags' states
     Serial.println(F("IRQ pin is actively LOW"));  // show that this function was called
 
@@ -49,10 +54,9 @@ FASTRUN void __attribute__((weak)) NRFISR()
     Serial.print(tx_df);  // print "data fail" mask state
     Serial.print(", data_ready: ");
     Serial.println(rx_dr);  // print "data ready" mask state
-}
 
-void enableNRF()  { digitalWriteFast(NRF_CE_PIN, LOW);  }
-void disableNRF() { digitalWriteFast(NRF_CE_PIN, HIGH); }
+    disableNRF();
+}
 
 
 
