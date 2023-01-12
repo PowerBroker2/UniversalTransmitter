@@ -64,6 +64,8 @@ void testSwitches()
   Serial.print("Tri SW A Was Switched: "); Serial.println(myController.triSwASwitchFlag());
   Serial.print("Tri SW B Was Switched: "); Serial.println(myController.triSwBSwitchFlag());
 
+  Serial.println();
+  
   Serial.print("SW 1 State: "); Serial.println(myController.sw1State());
   Serial.print("SW 2 State: "); Serial.println(myController.sw2State());
   Serial.print("SW 3 State: "); Serial.println(myController.sw3State());
