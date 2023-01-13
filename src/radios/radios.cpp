@@ -73,6 +73,8 @@ FASTRUN void __attribute__((weak)) NRFISR()
 */
 void setupRadios()
 {
+    pinMode(NRF_CE_PIN, OUTPUT);
+
     attachInterrupt(NRF_IRQ_PIN, NRFISR, FALLING);
 
     enableNRF();
