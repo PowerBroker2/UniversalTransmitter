@@ -94,7 +94,6 @@ void setupDisplay()
     
     enableTFT();
     tft.begin();
-    tft.fillScreen(ILI9341_BLACK);
 
     disableDisp();
 
