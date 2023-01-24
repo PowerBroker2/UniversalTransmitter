@@ -51,6 +51,7 @@ FASTRUN void __attribute__((weak)) whenTouched()
 {
     if (ts.tirqTouched())
     {
+        disableTFT();
         enableTS();
       
         if (ts.touched())
