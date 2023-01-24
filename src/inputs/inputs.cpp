@@ -1,5 +1,11 @@
 #include "Arduino.h"
 #include "OneButton.h"
+#include "TeensyTimerTool.h"
+
+
+
+
+using namespace TeensyTimerTool;
 
 
 
@@ -174,6 +180,9 @@ void setupSwitches()
 /*
 * ****************** Buttons ******************
 */
+extern const float TRIM_BTN_FREQ   = 1000; // Hz
+extern const float TRIM_BTN_PERIOD = 1.0 / TRIM_BTN_FREQ; // s
+
 extern const int PITCH_TRIM_UP_PIN      = 34;
 extern const int PITCH_TRIM_DOWN_PIN    = 33;
 extern const int ROLL_TRIM_RIGHT_PIN    = 31;
@@ -185,6 +194,8 @@ extern const int THROTTLE_TRIM_DOWN_PIN = 37;
 
 
 
+
+PeriodicTimer trimBtnTimer;
 
 OneButton pitch_trim_up = OneButton(
 	PITCH_TRIM_UP_PIN,    // Input pin for the button
@@ -237,34 +248,49 @@ OneButton throttle_trim_down = OneButton(
 
 
 
-FASTRUN void PITCH_TRIM_UP_ISR()      { pitch_trim_up.tick();      }
-FASTRUN void PITCH_TRIM_DOWN_ISR()    { pitch_trim_down.tick();    }
-FASTRUN void ROLL_TRIM_RIGHT_ISR()    { roll_trim_right.tick();    }
-FASTRUN void ROLL_TRIM_LEFT_ISR()     { roll_trim_left.tick();     }
-FASTRUN void YAW_TRIM_RIGHT_ISR()     { yaw_trim_right.tick();     }
-FASTRUN void YAW_TRIM_LEFT_ISR()      { yaw_trim_left.tick();      }
-FASTRUN void THROTTLE_TRIM_UP_ISR()   { throttle_trim_up.tick();   }
-FASTRUN void THROTTLE_TRIM_DOWN_ISR() { throttle_trim_down.tick(); }
+FASTRUN void CHECK_PITCH_TRIM_UP()      { pitch_trim_up.tick();      }
+FASTRUN void CHECK_PITCH_TRIM_DOWN()    { pitch_trim_down.tick();    }
+FASTRUN void CHECK_ROLL_TRIM_RIGHT()    { roll_trim_right.tick();    }
+FASTRUN void CHECK_ROLL_TRIM_LEFT()     { roll_trim_left.tick();     }
+FASTRUN void CHECK_YAW_TRIM_RIGHT()     { yaw_trim_right.tick();     }
+FASTRUN void CHECK_YAW_TRIM_LEFT()      { yaw_trim_left.tick();      }
+FASTRUN void CHECK_THROTTLE_TRIM_UP()   { throttle_trim_up.tick();   }
+FASTRUN void CHECK_THROTTLE_TRIM_DOWN() { throttle_trim_down.tick(); }
 
 
 
 
-void pitch_trim_up_click()           { Serial.println("Pitch Trim Up Click");           }
-void pitch_trim_down_click()         { Serial.println("Pitch Trim Down Click");         }
-void roll_trim_right_click()         { Serial.println("Roll Trim Right Click");         }
-void roll_trim_left_click()          { Serial.println("Roll Trim Left Click");          }
-void yaw_trim_right_click()          { Serial.println("Yaw Trim Right Click");          }
-void yaw_trim_left_click()           { Serial.println("Yaw Trim Left Click");           }
-void throttle_trim_up_click()        { Serial.println("Throttle Trim Up Click");        }
-void throttle_trim_down_click()      { Serial.println("Throttle Trim Down Click");      }
-void pitch_trim_up_long_click()      { Serial.println("Pitch Trim Up Long Click");      }
-void pitch_trim_down_long_click()    { Serial.println("Pitch Trim Down Long Click");    }
-void roll_trim_right_long_click()    { Serial.println("Roll Trim Right Long Click");    }
-void roll_trim_left_long_click()     { Serial.println("Roll Trim Left Long Click");     }
-void yaw_trim_right_long_click()     { Serial.println("Yaw Trim Right Long Click");     }
-void yaw_trim_left_long_click()      { Serial.println("Yaw Trim Left Long Click");      }
-void throttle_trim_up_long_click()   { Serial.println("Throttle Trim Up Long Click");   }
-void throttle_trim_down_long_click() { Serial.println("Throttle Trim Down Long Click"); }
+FASTRUN void checkTrimBtns()
+{
+	CHECK_PITCH_TRIM_UP();
+	CHECK_PITCH_TRIM_DOWN();
+	CHECK_ROLL_TRIM_RIGHT();
+	CHECK_ROLL_TRIM_LEFT();
+	CHECK_YAW_TRIM_RIGHT();
+	CHECK_YAW_TRIM_LEFT();
+	CHECK_THROTTLE_TRIM_UP();
+	CHECK_THROTTLE_TRIM_DOWN();
+}
+
+
+
+
+FASTRUN void __attribute__((weak)) pitch_trim_up_click()           { Serial.println("Pitch Trim Up Click");           }
+FASTRUN void __attribute__((weak)) pitch_trim_down_click()         { Serial.println("Pitch Trim Down Click");         }
+FASTRUN void __attribute__((weak)) roll_trim_right_click()         { Serial.println("Roll Trim Right Click");         }
+FASTRUN void __attribute__((weak)) roll_trim_left_click()          { Serial.println("Roll Trim Left Click");          }
+FASTRUN void __attribute__((weak)) yaw_trim_right_click()          { Serial.println("Yaw Trim Right Click");          }
+FASTRUN void __attribute__((weak)) yaw_trim_left_click()           { Serial.println("Yaw Trim Left Click");           }
+FASTRUN void __attribute__((weak)) throttle_trim_up_click()        { Serial.println("Throttle Trim Up Click");        }
+FASTRUN void __attribute__((weak)) throttle_trim_down_click()      { Serial.println("Throttle Trim Down Click");      }
+FASTRUN void __attribute__((weak)) pitch_trim_up_long_click()      { Serial.println("Pitch Trim Up Long Click");      }
+FASTRUN void __attribute__((weak)) pitch_trim_down_long_click()    { Serial.println("Pitch Trim Down Long Click");    }
+FASTRUN void __attribute__((weak)) roll_trim_right_long_click()    { Serial.println("Roll Trim Right Long Click");    }
+FASTRUN void __attribute__((weak)) roll_trim_left_long_click()     { Serial.println("Roll Trim Left Long Click");     }
+FASTRUN void __attribute__((weak)) yaw_trim_right_long_click()     { Serial.println("Yaw Trim Right Long Click");     }
+FASTRUN void __attribute__((weak)) yaw_trim_left_long_click()      { Serial.println("Yaw Trim Left Long Click");      }
+FASTRUN void __attribute__((weak)) throttle_trim_up_long_click()   { Serial.println("Throttle Trim Up Long Click");   }
+FASTRUN void __attribute__((weak)) throttle_trim_down_long_click() { Serial.println("Throttle Trim Down Long Click"); }
 
 
 
@@ -289,14 +315,7 @@ void setupButtons()
 	throttle_trim_up.attachDuringLongPress(throttle_trim_up_long_click);
 	throttle_trim_down.attachDuringLongPress(throttle_trim_down_long_click);
 
-	attachInterrupt(PITCH_TRIM_UP_PIN,      PITCH_TRIM_UP_ISR,      CHANGE);
-	attachInterrupt(PITCH_TRIM_DOWN_PIN,    PITCH_TRIM_DOWN_ISR,    CHANGE);
-	attachInterrupt(ROLL_TRIM_RIGHT_PIN,    ROLL_TRIM_RIGHT_ISR,    CHANGE);
-	attachInterrupt(ROLL_TRIM_LEFT_PIN,     ROLL_TRIM_LEFT_ISR,     CHANGE);
-	attachInterrupt(YAW_TRIM_RIGHT_PIN,     YAW_TRIM_RIGHT_ISR,     CHANGE);
-	attachInterrupt(YAW_TRIM_LEFT_PIN,      YAW_TRIM_LEFT_ISR,      CHANGE);
-	attachInterrupt(THROTTLE_TRIM_UP_PIN,   THROTTLE_TRIM_UP_ISR,   CHANGE);
-	attachInterrupt(THROTTLE_TRIM_DOWN_PIN, THROTTLE_TRIM_DOWN_ISR, CHANGE);
+	trimBtnTimer.begin(checkTrimBtns, TRIM_BTN_PERIOD * 1e6);
 }
 
 

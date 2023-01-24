@@ -59,6 +59,9 @@ void setupSwitches();
 /*
 * ****************** Buttons ******************
 */
+extern const float TRIM_BTN_FREQ;
+extern const float TRIM_BTN_PERIOD;
+
 extern const int PITCH_TRIM_UP_PIN;
 extern const int PITCH_TRIM_DOWN_PIN;
 extern const int ROLL_TRIM_RIGHT_PIN;
@@ -83,31 +86,33 @@ extern OneButton throttle_trim_down;
 
 
 
-FASTRUN void PITCH_TRIM_UP_ISR();
-FASTRUN void PITCH_TRIM_DOWN_ISR();
-FASTRUN void ROLL_TRIM_RIGHT_ISR();
-FASTRUN void ROLL_TRIM_LEFT_ISR();
-FASTRUN void YAW_TRIM_RIGHT_ISR();
-FASTRUN void YAW_TRIM_LEFT_ISR();
-FASTRUN void THROTTLE_TRIM_UP_ISR();
-FASTRUN void THROTTLE_TRIM_DOWN_ISR();
+FASTRUN void CHECK_PITCH_TRIM_UP();
+FASTRUN void CHECK_PITCH_TRIM_DOWN();
+FASTRUN void CHECK_ROLL_TRIM_RIGHT();
+FASTRUN void CHECK_ROLL_TRIM_LEFT();
+FASTRUN void CHECK_YAW_TRIM_RIGHT();
+FASTRUN void CHECK_YAW_TRIM_LEFT();
+FASTRUN void CHECK_THROTTLE_TRIM_UP();
+FASTRUN void CHECK_THROTTLE_TRIM_DOWN();
 
-void pitch_trim_up_click();
-void pitch_trim_down_click();
-void roll_trim_right_click();
-void roll_trim_left_click();
-void yaw_trim_right_click();
-void yaw_trim_left_click();
-void throttle_trim_up_click();
-void throttle_trim_down_click();
-void pitch_trim_up_long_click();
-void pitch_trim_down_long_click();
-void roll_trim_right_long_click();
-void roll_trim_left_long_click();
-void yaw_trim_right_long_click();
-void yaw_trim_left_long_click();
-void throttle_trim_up_long_click();
-void throttle_trim_down_long_click();
+FASTRUN void checkTrimBtns();
+
+FASTRUN void __attribute__((weak)) pitch_trim_up_click();
+FASTRUN void __attribute__((weak)) pitch_trim_down_click();
+FASTRUN void __attribute__((weak)) roll_trim_right_click();
+FASTRUN void __attribute__((weak)) roll_trim_left_click();
+FASTRUN void __attribute__((weak)) yaw_trim_right_click();
+FASTRUN void __attribute__((weak)) yaw_trim_left_click();
+FASTRUN void __attribute__((weak)) throttle_trim_up_click();
+FASTRUN void __attribute__((weak)) throttle_trim_down_click();
+FASTRUN void __attribute__((weak)) pitch_trim_up_long_click();
+FASTRUN void __attribute__((weak)) pitch_trim_down_long_click();
+FASTRUN void __attribute__((weak)) roll_trim_right_long_click();
+FASTRUN void __attribute__((weak)) roll_trim_left_long_click();
+FASTRUN void __attribute__((weak)) yaw_trim_right_long_click();
+FASTRUN void __attribute__((weak)) yaw_trim_left_long_click();
+FASTRUN void __attribute__((weak)) throttle_trim_up_long_click();
+FASTRUN void __attribute__((weak)) throttle_trim_down_long_click();
 
 void setupButtons();
 
