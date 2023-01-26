@@ -204,7 +204,7 @@ extern const int MIN_YAW_TRIM = -1;
 extern const int MAX_THROTTLE_TRIM =  1;
 extern const int MIN_THROTTLE_TRIM = -1;
 
-extern const float TRIM_UPDATE_VAL = 0.1;
+extern const float TRIM_UPDATE_VAL = 0.01;
 
 
 
@@ -262,10 +262,10 @@ OneButton throttle_trim_down = OneButton(
 
 
 
-extern float pitchTrimVal    = 0;
-extern float rollTrimVal     = 0;
-extern float yawTrimVal      = 0;
-extern float throttleTrimVal = 0;
+float pitchTrimVal    = 0;
+float rollTrimVal     = 0;
+float yawTrimVal      = 0;
+float throttleTrimVal = 0;
 
 
 
