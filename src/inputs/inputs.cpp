@@ -192,6 +192,20 @@ extern const int YAW_TRIM_LEFT_PIN      = 35;
 extern const int THROTTLE_TRIM_UP_PIN   = 38;
 extern const int THROTTLE_TRIM_DOWN_PIN = 37;
 
+extern const int MAX_PITCH_TRIM =  1;
+extern const int MIN_PITCH_TRIM = -1;
+
+extern const int MAX_ROLL_TRIM =  1;
+extern const int MIN_ROLL_TRIM = -1;
+
+extern const int MAX_YAW_TRIM =  1;
+extern const int MIN_YAW_TRIM = -1;
+
+extern const int MAX_THROTTLE_TRIM =  1;
+extern const int MIN_THROTTLE_TRIM = -1;
+
+extern const float TRIM_UPDATE_VAL = 0.1;
+
 
 
 
@@ -248,6 +262,14 @@ OneButton throttle_trim_down = OneButton(
 
 
 
+extern float pitchTrimVal    = 0;
+extern float rollTrimVal     = 0;
+extern float yawTrimVal      = 0;
+extern float throttleTrimVal = 0;
+
+
+
+
 FASTRUN void CHECK_PITCH_TRIM_UP()      { pitch_trim_up.tick();      }
 FASTRUN void CHECK_PITCH_TRIM_DOWN()    { pitch_trim_down.tick();    }
 FASTRUN void CHECK_ROLL_TRIM_RIGHT()    { roll_trim_right.tick();    }
@@ -275,22 +297,22 @@ FASTRUN void checkTrimBtns()
 
 
 
-FASTRUN void __attribute__((weak)) pitch_trim_up_click()           { Serial.println("Pitch Trim Up Click");           }
-FASTRUN void __attribute__((weak)) pitch_trim_down_click()         { Serial.println("Pitch Trim Down Click");         }
-FASTRUN void __attribute__((weak)) roll_trim_right_click()         { Serial.println("Roll Trim Right Click");         }
-FASTRUN void __attribute__((weak)) roll_trim_left_click()          { Serial.println("Roll Trim Left Click");          }
-FASTRUN void __attribute__((weak)) yaw_trim_right_click()          { Serial.println("Yaw Trim Right Click");          }
-FASTRUN void __attribute__((weak)) yaw_trim_left_click()           { Serial.println("Yaw Trim Left Click");           }
-FASTRUN void __attribute__((weak)) throttle_trim_up_click()        { Serial.println("Throttle Trim Up Click");        }
-FASTRUN void __attribute__((weak)) throttle_trim_down_click()      { Serial.println("Throttle Trim Down Click");      }
-FASTRUN void __attribute__((weak)) pitch_trim_up_long_click()      { Serial.println("Pitch Trim Up Long Click");      }
-FASTRUN void __attribute__((weak)) pitch_trim_down_long_click()    { Serial.println("Pitch Trim Down Long Click");    }
-FASTRUN void __attribute__((weak)) roll_trim_right_long_click()    { Serial.println("Roll Trim Right Long Click");    }
-FASTRUN void __attribute__((weak)) roll_trim_left_long_click()     { Serial.println("Roll Trim Left Long Click");     }
-FASTRUN void __attribute__((weak)) yaw_trim_right_long_click()     { Serial.println("Yaw Trim Right Long Click");     }
-FASTRUN void __attribute__((weak)) yaw_trim_left_long_click()      { Serial.println("Yaw Trim Left Long Click");      }
-FASTRUN void __attribute__((weak)) throttle_trim_up_long_click()   { Serial.println("Throttle Trim Up Long Click");   }
-FASTRUN void __attribute__((weak)) throttle_trim_down_long_click() { Serial.println("Throttle Trim Down Long Click"); }
+FASTRUN void __attribute__((weak)) pitch_trim_up_click()           { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
+FASTRUN void __attribute__((weak)) pitch_trim_down_click()         { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
+FASTRUN void __attribute__((weak)) roll_trim_right_click()         { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
+FASTRUN void __attribute__((weak)) roll_trim_left_click()          { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
+FASTRUN void __attribute__((weak)) yaw_trim_right_click()          { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
+FASTRUN void __attribute__((weak)) yaw_trim_left_click()           { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
+FASTRUN void __attribute__((weak)) throttle_trim_up_click()        { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
+FASTRUN void __attribute__((weak)) throttle_trim_down_click()      { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
+FASTRUN void __attribute__((weak)) pitch_trim_up_long_click()      { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
+FASTRUN void __attribute__((weak)) pitch_trim_down_long_click()    { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
+FASTRUN void __attribute__((weak)) roll_trim_right_long_click()    { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
+FASTRUN void __attribute__((weak)) roll_trim_left_long_click()     { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
+FASTRUN void __attribute__((weak)) yaw_trim_right_long_click()     { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
+FASTRUN void __attribute__((weak)) yaw_trim_left_long_click()      { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
+FASTRUN void __attribute__((weak)) throttle_trim_up_long_click()   { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
+FASTRUN void __attribute__((weak)) throttle_trim_down_long_click() { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
 
 
 
@@ -334,7 +356,7 @@ extern const int THROTTLE_PIN = A3; // Pin 17
 
 void setupJoys()
 {
-	analogReadResolution(16);
+	analogReadResolution(12);
 }
 
 
@@ -351,7 +373,7 @@ extern const int KNOB_2_PIN = A16; // Pin 40
 
 void setupKnobs()
 {
-	analogReadResolution(16);
+	analogReadResolution(12);
 }
 
 

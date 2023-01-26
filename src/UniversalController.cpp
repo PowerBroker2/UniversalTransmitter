@@ -239,9 +239,41 @@ void UniversalController::cleartriSwBSwitchFlag()
 
 
 
+float UniversalController::pitchTrim()
+{
+  return pitchTrimVal;
+}
+
+
+
+
+float UniversalController::rollTrim()
+{
+  return rollTrimVal;
+}
+
+
+
+
+float UniversalController::yawTrim()
+{
+  return yawTrimVal;
+}
+
+
+
+
+float UniversalController::throttleTrim()
+{
+  return throttleTrimVal;
+}
+
+
+
+
 int UniversalController::pitchJoy()
 {
-  return analogRead(PITCH_PIN);
+  return constrain(mapfloat(analogRead(PITCH_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -249,7 +281,7 @@ int UniversalController::pitchJoy()
 
 int UniversalController::rollJoy()
 {
-  return analogRead(ROLL_PIN);
+  return constrain(mapfloat(analogRead(ROLL_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -257,7 +289,7 @@ int UniversalController::rollJoy()
 
 int UniversalController::yawJoy()
 {
-  return analogRead(YAW_PIN);
+  return constrain(mapfloat(analogRead(YAW_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -265,7 +297,7 @@ int UniversalController::yawJoy()
 
 int UniversalController::throttleJoy()
 {
-  return analogRead(THROTTLE_PIN);
+  return constrain(mapfloat(analogRead(THROTTLE_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -273,7 +305,7 @@ int UniversalController::throttleJoy()
 
 int UniversalController::knob1()
 {
-  return analogRead(KNOB_1_PIN);
+  return constrain(mapfloat(analogRead(KNOB_1_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -281,7 +313,7 @@ int UniversalController::knob1()
 
 int UniversalController::knob2()
 {
-  return analogRead(KNOB_2_PIN);
+  return constrain(mapfloat(analogRead(KNOB_2_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
 
 
@@ -362,6 +394,14 @@ float UniversalController::touchY()
 float UniversalController::touchPressure()
 {
   return ts_point.z;
+}
+
+
+
+
+float UniversalController::mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 

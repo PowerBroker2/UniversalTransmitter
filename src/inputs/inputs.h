@@ -71,6 +71,20 @@ extern const int YAW_TRIM_LEFT_PIN;
 extern const int THROTTLE_TRIM_UP_PIN;
 extern const int THROTTLE_TRIM_DOWN_PIN;
 
+extern const int MAX_PITCH_TRIM;
+extern const int MIN_PITCH_TRIM;
+
+extern const int MAX_ROLL_TRIM;
+extern const int MIN_ROLL_TRIM;
+
+extern const int MAX_YAW_TRIM;
+extern const int MIN_YAW_TRIM;
+
+extern const int MAX_THROTTLE_TRIM;
+extern const int MIN_THROTTLE_TRIM;
+
+extern const float TRIM_UPDATE_VAL;
+
 
 
 
@@ -82,6 +96,14 @@ extern OneButton yaw_trim_right;
 extern OneButton yaw_trim_left;
 extern OneButton throttle_trim_up;
 extern OneButton throttle_trim_down;
+
+
+
+
+extern float pitchTrimVal;
+extern float rollTrimVal;
+extern float yawTrimVal;
+extern float throttleTrimVal;
 
 
 

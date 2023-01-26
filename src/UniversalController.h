@@ -43,6 +43,11 @@ public: // <<---------------------------------------//public
 	void cleartriSwASwitchFlag();
 	void cleartriSwBSwitchFlag();
 
+	float pitchTrim();
+	float rollTrim();
+	float yawTrim();
+	float throttleTrim();
+
 	int pitchJoy();
 	int rollJoy();
 	int yawJoy();
@@ -70,7 +75,7 @@ private: // <<---------------------------------------//private
 
 
 
-
+	float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
 };
 
 
