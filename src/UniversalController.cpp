@@ -271,7 +271,71 @@ float UniversalController::throttleTrim()
 
 
 
-int UniversalController::pitchJoy()
+bool UniversalController::pitchTrimFlag()
+{
+  return pitchTrimValUpdated;
+}
+
+
+
+
+bool UniversalController::rollTrimFlag()
+{
+  return rollTrimValUpdated;
+}
+
+
+
+
+bool UniversalController::yawTrimFlag()
+{
+  return yawTrimValUpdated;
+}
+
+
+
+
+bool UniversalController::throttleTrimFlag()
+{
+  return throttleTrimValUpdated;
+}
+
+
+
+
+void UniversalController::clearPitchTrimFlag()
+{
+  pitchTrimValUpdated = false;
+}
+
+
+
+
+void UniversalController::clearRollTrimFlag()
+{
+  rollTrimValUpdated = false;
+}
+
+
+
+
+void UniversalController::clearYawTrimFlag()
+{
+  yawTrimValUpdated = false;
+}
+
+
+
+
+void UniversalController::clearThrottleTrimFlag()
+{
+  throttleTrimValUpdated = false;
+}
+
+
+
+
+float UniversalController::pitchJoy()
 {
   return constrain(mapfloat(analogRead(PITCH_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
@@ -279,7 +343,7 @@ int UniversalController::pitchJoy()
 
 
 
-int UniversalController::rollJoy()
+float UniversalController::rollJoy()
 {
   return constrain(mapfloat(analogRead(ROLL_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
@@ -287,7 +351,7 @@ int UniversalController::rollJoy()
 
 
 
-int UniversalController::yawJoy()
+float UniversalController::yawJoy()
 {
   return constrain(mapfloat(analogRead(YAW_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
@@ -295,7 +359,7 @@ int UniversalController::yawJoy()
 
 
 
-int UniversalController::throttleJoy()
+float UniversalController::throttleJoy()
 {
   return constrain(mapfloat(analogRead(THROTTLE_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
@@ -303,7 +367,7 @@ int UniversalController::throttleJoy()
 
 
 
-int UniversalController::knob1()
+float UniversalController::knob1()
 {
   return constrain(mapfloat(analogRead(KNOB_1_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }
@@ -311,7 +375,7 @@ int UniversalController::knob1()
 
 
 
-int UniversalController::knob2()
+float UniversalController::knob2()
 {
   return constrain(mapfloat(analogRead(KNOB_2_PIN), 0, pow(2, 12), -1, 1), -1, 1);
 }

@@ -48,13 +48,23 @@ public: // <<---------------------------------------//public
 	float yawTrim();
 	float throttleTrim();
 
-	int pitchJoy();
-	int rollJoy();
-	int yawJoy();
-	int throttleJoy();
+	bool pitchTrimFlag();
+	bool rollTrimFlag();
+	bool yawTrimFlag();
+	bool throttleTrimFlag();
 
-	int knob1();
-	int knob2();
+	void clearPitchTrimFlag();
+	void clearRollTrimFlag();
+	void clearYawTrimFlag();
+	void clearThrottleTrimFlag();
+
+	float pitchJoy();
+	float rollJoy();
+	float yawJoy();
+	float throttleJoy();
+
+	float knob1();
+	float knob2();
 
 	float shuntVoltage();
 	float busVoltage();

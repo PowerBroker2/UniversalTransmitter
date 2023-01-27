@@ -262,10 +262,15 @@ OneButton throttle_trim_down = OneButton(
 
 
 
-float pitchTrimVal    = 0;
-float rollTrimVal     = 0;
-float yawTrimVal      = 0;
-float throttleTrimVal = 0;
+volatile float pitchTrimVal    = 0;
+volatile float rollTrimVal     = 0;
+volatile float yawTrimVal      = 0;
+volatile float throttleTrimVal = 0;
+
+volatile bool pitchTrimValUpdated;
+volatile bool rollTrimValUpdated;
+volatile bool yawTrimValUpdated;
+volatile bool throttleTrimValUpdated;
 
 
 
@@ -297,22 +302,22 @@ FASTRUN void checkTrimBtns()
 
 
 
-FASTRUN void __attribute__((weak)) pitch_trim_up_click()           { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
-FASTRUN void __attribute__((weak)) pitch_trim_down_click()         { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
-FASTRUN void __attribute__((weak)) roll_trim_right_click()         { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
-FASTRUN void __attribute__((weak)) roll_trim_left_click()          { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
-FASTRUN void __attribute__((weak)) yaw_trim_right_click()          { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
-FASTRUN void __attribute__((weak)) yaw_trim_left_click()           { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
-FASTRUN void __attribute__((weak)) throttle_trim_up_click()        { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
-FASTRUN void __attribute__((weak)) throttle_trim_down_click()      { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
-FASTRUN void __attribute__((weak)) pitch_trim_up_long_click()      { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
-FASTRUN void __attribute__((weak)) pitch_trim_down_long_click()    { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    }
-FASTRUN void __attribute__((weak)) roll_trim_right_long_click()    { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
-FASTRUN void __attribute__((weak)) roll_trim_left_long_click()     { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     }
-FASTRUN void __attribute__((weak)) yaw_trim_right_long_click()     { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
-FASTRUN void __attribute__((weak)) yaw_trim_left_long_click()      { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      }
-FASTRUN void __attribute__((weak)) throttle_trim_up_long_click()   { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
-FASTRUN void __attribute__((weak)) throttle_trim_down_long_click() { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); }
+FASTRUN void __attribute__((weak)) pitch_trim_up_click()           { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    pitchTrimValUpdated    = true; }
+FASTRUN void __attribute__((weak)) pitch_trim_down_click()         { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    pitchTrimValUpdated    = true; }
+FASTRUN void __attribute__((weak)) roll_trim_right_click()         { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     rollTrimValUpdated     = true; }
+FASTRUN void __attribute__((weak)) roll_trim_left_click()          { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     rollTrimValUpdated     = true; }
+FASTRUN void __attribute__((weak)) yaw_trim_right_click()          { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      yawTrimValUpdated      = true; }
+FASTRUN void __attribute__((weak)) yaw_trim_left_click()           { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      yawTrimValUpdated      = true; }
+FASTRUN void __attribute__((weak)) throttle_trim_up_click()        { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); throttleTrimValUpdated = true; }
+FASTRUN void __attribute__((weak)) throttle_trim_down_click()      { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); throttleTrimValUpdated = true; }
+FASTRUN void __attribute__((weak)) pitch_trim_up_long_click()      { pitchTrimVal     = constrain(pitchTrimVal    + TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    pitchTrimValUpdated    = true; }
+FASTRUN void __attribute__((weak)) pitch_trim_down_long_click()    { pitchTrimVal     = constrain(pitchTrimVal    - TRIM_UPDATE_VAL, MIN_PITCH_TRIM,    MAX_PITCH_TRIM);    pitchTrimValUpdated    = true; }
+FASTRUN void __attribute__((weak)) roll_trim_right_long_click()    { rollTrimVal      = constrain(rollTrimVal     + TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     rollTrimValUpdated     = true; }
+FASTRUN void __attribute__((weak)) roll_trim_left_long_click()     { rollTrimVal      = constrain(rollTrimVal     - TRIM_UPDATE_VAL, MIN_ROLL_TRIM,     MAX_ROLL_TRIM);     rollTrimValUpdated     = true; }
+FASTRUN void __attribute__((weak)) yaw_trim_right_long_click()     { yawTrimVal       = constrain(yawTrimVal      + TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      yawTrimValUpdated      = true; }
+FASTRUN void __attribute__((weak)) yaw_trim_left_long_click()      { yawTrimVal       = constrain(yawTrimVal      - TRIM_UPDATE_VAL, MIN_YAW_TRIM,      MAX_YAW_TRIM);      yawTrimValUpdated      = true; }
+FASTRUN void __attribute__((weak)) throttle_trim_up_long_click()   { throttleTrimVal  = constrain(throttleTrimVal + TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); throttleTrimValUpdated = true; }
+FASTRUN void __attribute__((weak)) throttle_trim_down_long_click() { throttleTrimVal  = constrain(throttleTrimVal - TRIM_UPDATE_VAL, MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM); throttleTrimValUpdated = true; }
 
 
 

@@ -100,10 +100,15 @@ extern OneButton throttle_trim_down;
 
 
 
-extern float pitchTrimVal;
-extern float rollTrimVal;
-extern float yawTrimVal;
-extern float throttleTrimVal;
+extern volatile float pitchTrimVal;
+extern volatile float rollTrimVal;
+extern volatile float yawTrimVal;
+extern volatile float throttleTrimVal;
+
+extern volatile bool pitchTrimValUpdated;
+extern volatile bool rollTrimValUpdated;
+extern volatile bool yawTrimValUpdated;
+extern volatile bool throttleTrimValUpdated;
 
 
 
