@@ -58,6 +58,26 @@ public: // <<---------------------------------------//public
 	void clearYawTrimFlag();
 	void clearThrottleTrimFlag();
 
+	void setPitchADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+	void setRollADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+	void setYawADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+	void setThrottleADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+	void setKnob1ADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+	void setKnob2ADCLimits(const int& minADC = 0, const int& maxADC = pow(2, 12));
+
+	int minPitchADC();
+	int maxPitchADC();
+	int minRollADC();
+	int maxRollADC();
+	int minYawADC();
+	int maxYawADC();
+	int minThrottleADC();
+	int maxThrottleADC();
+	int minKnob1ADC();
+	int maxKnob1ADC();
+	int minKnob2ADC();
+	int maxKnob2ADC();
+
 	float pitchJoy();
 	float rollJoy();
 	float yawJoy();
@@ -78,6 +98,9 @@ public: // <<---------------------------------------//public
 	float touchY();
 	float touchPressure();
 
+	float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
+	float expo(float input, float expo, float maxExpo = 0.5);
+
 
 
 
@@ -85,7 +108,18 @@ private: // <<---------------------------------------//private
 
 
 
-	float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
+	int _minPitchADC    = 0;
+	int _maxPitchADC    = pow(2, 12);
+	int _minRollADC     = 0;
+	int _maxRollADC     = pow(2, 12);
+	int _minYawADC      = 0;
+	int _maxYawADC      = pow(2, 12);
+	int _minThrottleADC = 0;
+	int _maxThrottleADC = pow(2, 12);
+	int _minKnob1ADC    = 0;
+	int _maxKnob1ADC    = pow(2, 12);
+	int _minKnob2ADC    = 0;
+	int _maxKnob2ADC    = pow(2, 12);
 };
 
 

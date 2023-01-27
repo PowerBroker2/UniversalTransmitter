@@ -335,9 +335,159 @@ void UniversalController::clearThrottleTrimFlag()
 
 
 
+void UniversalController::setPitchADCLimits(const int& minADC, const int& maxADC)
+{
+  _minPitchADC = minADC;
+  _maxPitchADC = maxADC;
+}
+
+
+
+
+void UniversalController::setRollADCLimits(const int& minADC, const int& maxADC)
+{
+  _minRollADC = minADC;
+  _maxRollADC = maxADC;
+}
+
+
+
+
+void UniversalController::setYawADCLimits(const int& minADC, const int& maxADC)
+{
+  _minYawADC = minADC;
+  _maxYawADC = maxADC;
+}
+
+
+
+
+void UniversalController::setThrottleADCLimits(const int& minADC, const int& maxADC)
+{
+  _minThrottleADC = minADC;
+  _maxThrottleADC = maxADC;
+}
+
+
+
+
+void UniversalController::setKnob1ADCLimits(const int& minADC, const int& maxADC)
+{
+  _minKnob1ADC = minADC;
+  _maxKnob1ADC = maxADC;
+}
+
+
+
+
+void UniversalController::setKnob2ADCLimits(const int& minADC, const int& maxADC)
+{
+  _minKnob2ADC = minADC;
+  _maxKnob2ADC = maxADC;
+}
+
+
+
+
+int UniversalController::minPitchADC()
+{
+  return _minPitchADC;
+}
+
+
+
+
+int UniversalController::maxPitchADC()
+{
+  return _maxPitchADC;
+}
+
+
+
+
+int UniversalController::minRollADC()
+{
+  return _minRollADC;
+}
+
+
+
+
+int UniversalController::maxRollADC()
+{
+  return _maxRollADC;
+}
+
+
+
+
+int UniversalController::minYawADC()
+{
+  return _minYawADC;
+}
+
+
+
+
+int UniversalController::maxYawADC()
+{
+  return _maxYawADC;
+}
+
+
+
+
+int UniversalController::minThrottleADC()
+{
+  return _minThrottleADC;
+}
+
+
+
+
+int UniversalController::maxThrottleADC()
+{
+  return _maxThrottleADC;
+}
+
+
+
+
+int UniversalController::minKnob1ADC()
+{
+  return _minKnob1ADC;
+}
+
+
+
+
+int UniversalController::maxKnob1ADC()
+{
+  return _maxKnob1ADC;
+}
+
+
+
+
+int UniversalController::minKnob2ADC()
+{
+  return _minKnob2ADC;
+}
+
+
+
+
+int UniversalController::maxKnob2ADC()
+{
+  return _maxKnob2ADC;
+}
+
+
+
+
 float UniversalController::pitchJoy()
 {
-  return constrain(mapfloat(analogRead(PITCH_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(PITCH_PIN), _minPitchADC, _maxPitchADC, -1, 1), -1, 1);
 }
 
 
@@ -345,7 +495,7 @@ float UniversalController::pitchJoy()
 
 float UniversalController::rollJoy()
 {
-  return constrain(mapfloat(analogRead(ROLL_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(ROLL_PIN), _minRollADC, _maxRollADC, -1, 1), -1, 1);
 }
 
 
@@ -353,7 +503,7 @@ float UniversalController::rollJoy()
 
 float UniversalController::yawJoy()
 {
-  return constrain(mapfloat(analogRead(YAW_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(YAW_PIN), _minYawADC, _maxYawADC, -1, 1), -1, 1);
 }
 
 
@@ -361,7 +511,7 @@ float UniversalController::yawJoy()
 
 float UniversalController::throttleJoy()
 {
-  return constrain(mapfloat(analogRead(THROTTLE_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(THROTTLE_PIN), _minThrottleADC, _maxThrottleADC, -1, 1), -1, 1);
 }
 
 
@@ -369,7 +519,7 @@ float UniversalController::throttleJoy()
 
 float UniversalController::knob1()
 {
-  return constrain(mapfloat(analogRead(KNOB_1_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(KNOB_1_PIN), _minKnob1ADC, _maxKnob1ADC, -1, 1), -1, 1);
 }
 
 
@@ -377,7 +527,7 @@ float UniversalController::knob1()
 
 float UniversalController::knob2()
 {
-  return constrain(mapfloat(analogRead(KNOB_2_PIN), 0, pow(2, 12), -1, 1), -1, 1);
+  return constrain(mapfloat(analogRead(KNOB_2_PIN), _minKnob2ADC, _maxKnob2ADC, -1, 1), -1, 1);
 }
 
 
@@ -466,6 +616,23 @@ float UniversalController::touchPressure()
 float UniversalController::mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+
+
+float UniversalController::expo(float input, float expo, float maxExpo)
+{
+  // https://www.rcgroups.com/forums/showthread.php?375044-what-is-the-formula-for-the-expo-function
+
+  float constrainedInput = constrain(input, -1.0, 1.0);
+
+  float A2 = expo / 100.0 * maxExpo;
+  float A3 = 1.0 / exp(A2); 
+
+  float output = constrainedInput * exp(abs(A2 * constrainedInput)) * A3;
+
+  return constrain(output, -1.0, 1.0);
 }
 
 
