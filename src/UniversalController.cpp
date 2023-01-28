@@ -628,7 +628,7 @@ float UniversalController::expo(float input, float expo)
 
   float constrainedInput = constrain(input, -1.0, 1.0);
 
-  float output = ((1.0 - ((100.0 - expo) / 100.0)) * pow(constrainedInput, 3.0)) + (constrainedInput * ((100.0 - expo) / 100.0));
+  float output = -(((1.0 - ((100.0 - expo) / 100.0)) * pow(constrainedInput, 3.0)) + (constrainedInput * ((100.0 - expo) / 100.0)));
 
   return constrain(output, -1.0, 1.0);
 }
