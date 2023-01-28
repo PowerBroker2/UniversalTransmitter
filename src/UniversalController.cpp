@@ -621,16 +621,14 @@ float UniversalController::mapfloat(float x, float in_min, float in_max, float o
 
 
 
-float UniversalController::expo(float input, float expo, float maxExpo)
+float UniversalController::expo(float input, float expo)
 {
-  // https://www.rcgroups.com/forums/showthread.php?375044-what-is-the-formula-for-the-expo-function
+  // https://www.rcgroups.com/forums/showthread.php?375044-what-is-the-formula-for-the-expo-function/page2
+  // https://www.desmos.com/calculator/5wktdeykaj
 
   float constrainedInput = constrain(input, -1.0, 1.0);
 
-  float A2 = expo / 100.0 * maxExpo;
-  float A3 = 1.0 / exp(A2); 
-
-  float output = constrainedInput * exp(abs(A2 * constrainedInput)) * A3;
+  float output = ((1.0 - ((100.0 - expo) / 100.0)) * pow(constrainedInput, 3.0)) + (constrainedInput * ((100.0 - expo) / 100.0));
 
   return constrain(output, -1.0, 1.0);
 }

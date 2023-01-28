@@ -99,7 +99,7 @@ public: // <<---------------------------------------//public
 	float touchPressure();
 
 	float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
-	float expo(float input, float expo, float maxExpo = 0.5);
+	float expo(float input, float expo);
 
 
 
