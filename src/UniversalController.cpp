@@ -239,6 +239,38 @@ void UniversalController::cleartriSwBSwitchFlag()
 
 
 
+void UniversalController::setPitchTrim(const float& trim)
+{
+  pitchTrimVal = constrain(trim - fmod(pitchTrimVal, TRIM_UPDATE_VAL), MIN_PITCH_TRIM, MAX_PITCH_TRIM);
+}
+
+
+
+
+void UniversalController::setRollTrim(const float& trim)
+{
+  rollTrimVal = constrain(trim - fmod(rollTrimVal, TRIM_UPDATE_VAL), MIN_ROLL_TRIM, MAX_ROLL_TRIM);
+}
+
+
+
+
+void UniversalController::setYawTrim(const float& trim)
+{
+  yawTrimVal = constrain(trim - fmod(yawTrimVal, TRIM_UPDATE_VAL), MIN_YAW_TRIM, MAX_YAW_TRIM);
+}
+
+
+
+
+void UniversalController::setThrottleTrim(const float& trim)
+{
+  throttleTrimVal = constrain(trim - fmod(throttleTrimVal, TRIM_UPDATE_VAL), MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM);
+}
+
+
+
+
 float UniversalController::pitchTrim()
 {
   return pitchTrimVal;

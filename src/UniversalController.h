@@ -43,6 +43,11 @@ public: // <<---------------------------------------//public
 	void cleartriSwASwitchFlag();
 	void cleartriSwBSwitchFlag();
 
+	void setPitchTrim(const float& trim);
+	void setRollTrim(const float& trim);
+	void setYawTrim(const float& trim);
+	void setThrottleTrim(const float& trim);
+
 	float pitchTrim();
 	float rollTrim();
 	float yawTrim();
