@@ -255,7 +255,7 @@ private: // <<---------------------------------------//private
 
 	int   mixChNum;
 	float mixVal;
-	bool  reverse;
+	bool  reverse = false;
 	float expo;
 
 	float raw;
