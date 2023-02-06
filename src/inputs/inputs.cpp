@@ -620,6 +620,9 @@ void channel::update()
 	
 	reversed_expo = constrain(applyExpo(reversed, expo), CH_MIN, CH_MAX);
 
+	if (!isAnalog)
+		reversed_expo = abs(reversed_expo);
+
 	if (useLowRate)
 		reversed_expo *= lowRate;
 	else
