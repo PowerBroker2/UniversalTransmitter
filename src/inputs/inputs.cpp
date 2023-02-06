@@ -561,7 +561,7 @@ void channel::setMixChNum(const int& _mixChNum)
 		mixChNum = _mixChNum;
 }
 
-float channel::getMixChNum()
+int channel::getMixChNum()
 {
 	return mixChNum;
 }

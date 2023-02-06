@@ -227,7 +227,7 @@ public: // <<---------------------------------------//public
     void  setMinADC(const int& _minADC);
     int   getMinADC();
 	void  setMixChNum(const int& _mixChNum);
-	float getMixChNum();
+	int   getMixChNum();
 	void  setMix(const float& _mixVal);
 	float getMix();
 	void  setReverse(const bool& _reverse);
