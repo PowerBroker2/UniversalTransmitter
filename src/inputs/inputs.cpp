@@ -410,49 +410,6 @@ channel throttle_ch;
 
 
 
-volatile bool pitchReverse    = false;
-volatile bool rollReverse     = false;
-volatile bool yawReverse      = false;
-volatile bool throttleReverse = false;
-
-volatile float pitchExpo    = 0;
-volatile float rollExpo     = 0;
-volatile float yawExpo      = 0;
-volatile float throttleExpo = 0;
-
-volatile float pitchMixCh    = 0;
-volatile float rollMixCh     = 0;
-volatile float yawMixCh      = 0;
-volatile float throttleMixCh = 0;
-
-volatile float pitchMix    = 0;
-volatile float rollMix     = 0;
-volatile float yawMix      = 0;
-volatile float throttleMix = 0;
-
-volatile float pitchRaw    = 0;
-volatile float rollRaw     = 0;
-volatile float yawRaw      = 0;
-volatile float throttleRaw = 0;
-
-volatile float pitchWith_Reverse    = 0;
-volatile float rollWith_Reverse     = 0;
-volatile float yawWith_Reverse      = 0;
-volatile float throttleWith_Reverse = 0;
-
-volatile float pitchWith_Reverse_Expo    = 0;
-volatile float rollWith_Reverse_Expo     = 0;
-volatile float yawWith_Reverse_Expo      = 0;
-volatile float throttleWith_Reverse_Expo = 0;
-
-volatile float pitchWith_Reverse_Expo_Mix    = 0;
-volatile float rollWith_Reverse_Expo_Mix     = 0;
-volatile float yawWith_Reverse_Expo_Mix      = 0;
-volatile float throttleWith_Reverse_Expo_Mix = 0;
-
-
-
-
 void setupJoys()
 {
 	analogReadResolution(ANALOG_RESOLUTION);
@@ -484,18 +441,6 @@ extern const int KNOB_2_PIN = A16; // Pin 40
 
 channel knob1_ch;
 channel knob2_ch;
-
-
-
-
-volatile float knob1Raw = 0;
-volatile float knob2Raw = 0;
-
-volatile float knob1Expo = 0;
-volatile float knob2Expo = 0;
-
-volatile float knob1Mix = 0;
-volatile float knob2Mix = 0;
 
 
 

@@ -156,48 +156,6 @@ extern const int THROTTLE_PIN;
 
 
 
-extern volatile bool pitchReverse;
-extern volatile bool rollReverse;
-extern volatile bool yawReverse;
-extern volatile bool throttleReverse;
-
-extern volatile float pitchExpo;
-extern volatile float rollExpo;
-extern volatile float yawExpo;
-extern volatile float throttleExpo;
-
-extern volatile float pitchMixCh;
-extern volatile float rollMixCh;
-extern volatile float yawMixCh;
-extern volatile float throttleMixCh;
-
-extern volatile float pitchMix;
-extern volatile float rollMix;
-extern volatile float yawMix;
-extern volatile float throttleMix;
-
-extern volatile float pitchRaw;
-extern volatile float rollRaw;
-extern volatile float yawRaw;
-extern volatile float throttleRaw;
-
-extern volatile float pitchWith_Reverse;
-extern volatile float rollWith_Reverse;
-extern volatile float yawWith_Reverse;
-extern volatile float throttleWith_Reverse;
-
-extern volatile float pitchWith_Reverse_Expo;
-extern volatile float rollWith_Reverse_Expo;
-extern volatile float yawWith_Reverse_Expo;
-extern volatile float throttleWith_Reverse_Expo;
-
-extern volatile float pitchWith_Reverse_Expo_Mix;
-extern volatile float rollWith_Reverse_Expo_Mix;
-extern volatile float yawWith_Reverse_Expo_Mix;
-extern volatile float throttleWith_Reverse_Expo_Mix;
-
-
-
 
 void setupJoys();
 
@@ -209,18 +167,6 @@ void setupJoys();
 */
 extern const int KNOB_1_PIN;
 extern const int KNOB_2_PIN;
-
-
-
-
-extern volatile float knob1Raw;
-extern volatile float knob2Raw;
-
-extern volatile float knob1Expo;
-extern volatile float knob2Expo;
-
-extern volatile float knob1Mix;
-extern volatile float knob2Mix;
 
 
 
