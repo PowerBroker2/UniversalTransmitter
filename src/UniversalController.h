@@ -17,14 +17,14 @@ public: // <<---------------------------------------//public
 	int numBuddyChannels();
 	int buddyChannel(const int& channelNum);
 
-	int sw1State();
-	int sw2State();
-	int sw3State();
-	int sw4State();
-	int sw5State();
-	int sw6State();
-	int triSwAState();
-	int triSwBState();
+	float sw1State();
+	float sw2State();
+	float sw3State();
+	float sw4State();
+	float sw5State();
+	float sw6State();
+	float triSwAState();
+	float triSwBState();
 	
 	bool sw1SwitchFlag();
 	bool sw2SwitchFlag();
