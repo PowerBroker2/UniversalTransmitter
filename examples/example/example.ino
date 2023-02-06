@@ -23,6 +23,8 @@ int maxKnob1ADC    = 4090;
 int minKnob2ADC    = 0;
 int maxKnob2ADC    = 4090;
 
+int mixDiff = 5;
+
 
 
 
@@ -59,6 +61,7 @@ void loop()
   testSwitches();
   testJoys();
   testKnobs();
+  testTrim();
   testPowerMon();
   testTouch();
   testBT();
@@ -143,6 +146,19 @@ void testKnobs()
 {
   Serial.print("Knob 1: "); Serial.println(myController.knob1());
   Serial.print("Knob 2: "); Serial.println(myController.knob2());
+
+  Serial.println();
+}
+
+
+
+
+void testTrim()
+{
+  Serial.print("Pitch Trim: ");    Serial.println(myController.pitchTrim());
+  Serial.print("Roll Trim: ");     Serial.println(myController.rollTrim());
+  Serial.print("Yaw Trim: ");      Serial.println(myController.yawTrim());
+  Serial.print("Throttle Trim: "); Serial.println(myController.throttleTrim());
 
   Serial.println();
 }
