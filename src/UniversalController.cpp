@@ -44,65 +44,65 @@ int UniversalController::buddyChannel(const int& channelNum)
 
 
 
-int UniversalController::sw1State()
+float UniversalController::sw1State()
 {
-  return sw_1_state;
+  return getVal(sw_1_ch);
 }
 
 
 
 
-int UniversalController::sw2State()
+float UniversalController::sw2State()
 {
-  return sw_2_state;
+  return getVal(sw_2_ch);
 }
 
 
 
 
-int UniversalController::sw3State()
+float UniversalController::sw3State()
 {
-  return sw_3_state;
+  return getVal(sw_3_ch);
 }
 
 
 
 
-int UniversalController::sw4State()
+float UniversalController::sw4State()
 {
-  return sw_4_state;
+  return getVal(sw_4_ch);
 }
 
 
 
 
-int UniversalController::sw5State()
+float UniversalController::sw5State()
 {
-  return sw_5_state;
+  return getVal(sw_5_ch);
 }
 
 
 
 
-int UniversalController::sw6State()
+float UniversalController::sw6State()
 {
-  return sw_6_state;
+  return getVal(sw_6_ch);
 }
 
 
 
 
-int UniversalController::triSwAState()
+float UniversalController::triSwAState()
 {
-  return tri_sw_a_state;
+  return getVal(tri_sw_a_ch);
 }
 
 
 
 
-int UniversalController::triSwBState()
+float UniversalController::triSwBState()
 {
-  return tri_sw_b_state;
+  return getVal(tri_sw_b_ch);
 }
 
 
