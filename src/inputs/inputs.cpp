@@ -490,8 +490,8 @@ extern const float CH_MIN          = -1.0;
 extern const float EXPO_MAX = 100.0;
 extern const float EXPO_MIN = 0.0;
 
-extern const float MIX_MAX = 100.0;
-extern const float MIX_MIN = 0.0;
+extern const float MIX_MAX =  100.0;
+extern const float MIX_MIN = -100.0;
 
 
 
