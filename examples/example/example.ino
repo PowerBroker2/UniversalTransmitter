@@ -1,4 +1,6 @@
 #include "UniversalController.h"
+#include "display/display.h"
+#include "radios/radios.h"
 
 
 
@@ -8,11 +10,41 @@ UniversalController myController;
 
 
 
+int minPitchADC    = 420;
+int maxPitchADC    = 3930;
+int minRollADC     = 175;
+int maxRollADC     = 3815;
+int minYawADC      = 165;
+int maxYawADC      = 3750;
+int minThrottleADC = 430;
+int maxThrottleADC = 4000;
+int minKnob1ADC    = 0;
+int maxKnob1ADC    = 4090;
+int minKnob2ADC    = 0;
+int maxKnob2ADC    = 4090;
+
+
+
+
 void setup()
 {
   Serial.begin(2000000);
+  BT.begin(38400);
+  ESP.begin(115200);
 
   myController.begin();
+
+  myController.setPitchADCLimits(minPitchADC, maxPitchADC);
+  myController.setRollADCLimits(minRollADC, maxRollADC);
+  myController.setYawADCLimits(minYawADC, maxYawADC);
+  myController.setThrottleADCLimits(minThrottleADC, maxThrottleADC);
+  myController.setKnob1ADCLimits(minKnob1ADC, maxKnob1ADC);
+  myController.setKnob2ADCLimits(minKnob2ADC, maxKnob2ADC);
+
+//  myController.setThrottleExpo(100);
+//  myController.setThrottleReverse(true);
+//  myController.setThrottleMixCh(SW_1_CH);
+//  myController.setThrottleMix(50);
 }
 
 
@@ -29,6 +61,8 @@ void loop()
   testKnobs();
   testPowerMon();
   testTouch();
+  testBT();
+  testESP();
   
   delay(10);
 }
@@ -78,15 +112,15 @@ void testSwitches()
 
   Serial.println();
 
-  myController.clearsw1SwitchFlag();
-  myController.clearsw2SwitchFlag();
-  myController.clearsw3SwitchFlag();
-  myController.clearsw4SwitchFlag();
-  myController.clearsw5SwitchFlag();
-  myController.clearsw6SwitchFlag();
+  myController.clearSw1SwitchFlag();
+  myController.clearSw2SwitchFlag();
+  myController.clearSw3SwitchFlag();
+  myController.clearSw4SwitchFlag();
+  myController.clearSw5SwitchFlag();
+  myController.clearSw6SwitchFlag();
   
-  myController.cleartriSwASwitchFlag();
-  myController.cleartriSwBSwitchFlag();
+  myController.clearTriSwASwitchFlag();
+  myController.clearTriSwBSwitchFlag();
 }
 
 
@@ -130,6 +164,35 @@ void testPowerMon()
 
 
 
+FASTRUN void whenTouched()
+{
+    if (ts.tirqTouched())
+    {
+        enableTS();
+      
+        if (ts.touched())
+        {
+            long currTime = micros();
+
+            if ((currTime - time_touched) >= TOUCH_TIME_THRESH)
+            {
+                ts_point      = ts.getPoint();
+                touch_handled = false;
+                time_touched  = currTime;
+            }
+            else
+            {
+                ts.getPoint();
+            }
+        }
+        
+        disableTS();
+    }
+}
+
+
+
+
 void testTouch()
 {
   Serial.print("Was Touched: ");    Serial.println(myController.wasTouched());
@@ -144,3 +207,44 @@ void testTouch()
 
 
 
+
+void testBT()
+{
+  if (BT.available())
+  {
+    Serial.println("BlueTooth Message: ");
+    
+    while (BT.available())
+    {
+      char c = BT.read();
+      
+      Serial.write(c);
+      BT.write(c);
+    }
+  }
+}
+
+
+
+
+void testESP()
+{
+  if (Serial.available())
+  {
+    String instr = Serial.readString();
+    
+    Serial.print(instr);
+    ESP.print(instr);
+  }
+  
+  if (ESP.available())
+  {
+    delay(10);
+    Serial.println("ESP Message: ");
+    
+    while (ESP.available())
+    {
+      Serial.write(ESP.read());
+    }
+  }
+}
