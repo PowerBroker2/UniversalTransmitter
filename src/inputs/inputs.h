@@ -8,25 +8,25 @@
 /*
 * ****************** Switches ******************
 */
-extern const volatile int SW_1_PIN;
-extern const volatile int SW_2_PIN;
-extern const volatile int SW_3_PIN;
-extern const volatile int SW_4_PIN;
-extern const volatile int SW_5_PIN;
-extern const volatile int SW_6_PIN;
+extern const int SW_1_PIN;
+extern const int SW_2_PIN;
+extern const int SW_3_PIN;
+extern const int SW_4_PIN;
+extern const int SW_5_PIN;
+extern const int SW_6_PIN;
 
-extern const volatile int TRI_SW_A_PIN;
-extern const volatile int TRI_SW_B_PIN;
+extern const int TRI_SW_A_PIN;
+extern const int TRI_SW_B_PIN;
 
-extern volatile int sw_1_state;
-extern volatile int sw_2_state;
-extern volatile int sw_3_state;
-extern volatile int sw_4_state;
-extern volatile int sw_5_state;
-extern volatile int sw_6_state;
+extern int sw_1_state;
+extern int sw_2_state;
+extern int sw_3_state;
+extern int sw_4_state;
+extern int sw_5_state;
+extern int sw_6_state;
 
-extern volatile int tri_sw_a_state;
-extern volatile int tri_sw_b_state;
+extern int tri_sw_a_state;
+extern int tri_sw_b_state;
 
 extern volatile bool sw_1_switched;
 extern volatile bool sw_2_switched;
@@ -156,6 +156,48 @@ extern const int THROTTLE_PIN;
 
 
 
+extern volatile bool pitchReverse;
+extern volatile bool rollReverse;
+extern volatile bool yawReverse;
+extern volatile bool throttleReverse;
+
+extern volatile float pitchExpo;
+extern volatile float rollExpo;
+extern volatile float yawExpo;
+extern volatile float throttleExpo;
+
+extern volatile float pitchMixCh;
+extern volatile float rollMixCh;
+extern volatile float yawMixCh;
+extern volatile float throttleMixCh;
+
+extern volatile float pitchMix;
+extern volatile float rollMix;
+extern volatile float yawMix;
+extern volatile float throttleMix;
+
+extern volatile float pitchRaw;
+extern volatile float rollRaw;
+extern volatile float yawRaw;
+extern volatile float throttleRaw;
+
+extern volatile float pitchWith_Reverse;
+extern volatile float rollWith_Reverse;
+extern volatile float yawWith_Reverse;
+extern volatile float throttleWith_Reverse;
+
+extern volatile float pitchWith_Reverse_Expo;
+extern volatile float rollWith_Reverse_Expo;
+extern volatile float yawWith_Reverse_Expo;
+extern volatile float throttleWith_Reverse_Expo;
+
+extern volatile float pitchWith_Reverse_Expo_Mix;
+extern volatile float rollWith_Reverse_Expo_Mix;
+extern volatile float yawWith_Reverse_Expo_Mix;
+extern volatile float throttleWith_Reverse_Expo_Mix;
+
+
+
 
 void setupJoys();
 
@@ -171,7 +213,136 @@ extern const int KNOB_2_PIN;
 
 
 
+extern volatile float knob1Raw;
+extern volatile float knob2Raw;
+
+extern volatile float knob1Expo;
+extern volatile float knob2Expo;
+
+extern volatile float knob1Mix;
+extern volatile float knob2Mix;
+
+
+
+
 void setupKnobs();
+
+
+
+
+/*
+* ****************** General ******************
+*/
+extern const int ANALOG_RESOLUTION;
+
+extern const float INPUT_MON_FREQ;
+extern const float INPUT_MON_PERIOD;
+
+extern const int NUM_CHS;
+
+extern const int PITCH_CH;
+extern const int ROLL_CH;
+extern const int YAW_CH;
+extern const int THROTTLE_CH;
+extern const int KNOB_1_CH;
+extern const int KNOB_2_CH;
+extern const int SW_1_CH;
+extern const int SW_2_CH;
+extern const int SW_3_CH;
+extern const int SW_4_CH;
+extern const int SW_5_CH;
+extern const int SW_6_CH;
+extern const int TRI_A_CH;
+extern const int TRI_B_CH;
+
+extern const float CH_MAX;
+extern const float CH_MIN;
+
+extern const float EXPO_MAX;
+extern const float EXPO_MIN;
+
+extern const float MIX_MAX;
+extern const float MIX_MIN;
+
+
+
+
+class channel
+{
+public: // <<---------------------------------------//public
+	void  setPinNum(const int& _pinNum);
+	int   getPinNum();
+	void  setChNum(const int& _chNum);
+	int   getChNum();
+    void  setIsAn(const bool& _isAnalog);
+    bool  getIsAn();
+    void  setMaxADC(const int& _maxADC);
+    int   getMaxADC();
+    void  setMinADC(const int& _minADC);
+    int   getMinADC();
+	void  setMixChNum(const int& _mixChNum);
+	float getMixChNum();
+	void  setMix(const float& _mixVal);
+	float getMix();
+	void  setReverse(const bool& _reverse);
+	bool  getReverse();
+	void  setExpo(const float& _expo);
+	float getExpo();
+	void  update();
+    float getRaw();
+	float getReversed();
+	float getReversed_expo();
+	void  useHighRates();
+	void  setHighRate(const float& _highRate);
+	float getHighRate();
+	void  useLowRates();
+	void  setLowRate(const float& _lowRate);
+	float getLowRate();
+
+private: // <<---------------------------------------//private
+	int pinNum;
+	int chNum;
+
+    bool isAnalog = true;
+    int  maxADC   = pow(2, 12);
+    int  minADC   = 0;
+
+	int   mixChNum;
+	float mixVal;
+	bool  reverse;
+	float expo;
+
+	float raw;
+	float reversed;
+	float reversed_expo;
+
+	bool  useLowRate = false;
+	float lowRate    = 0.8;
+	float highRate   = 1.0;
+};
+
+extern channel pitch_ch;
+extern channel roll_ch;
+extern channel yaw_ch;
+extern channel throttle_ch;
+extern channel knob1_ch;
+extern channel knob2_ch;
+extern channel sw_1_ch;
+extern channel sw_2_ch;
+extern channel sw_3_ch;
+extern channel sw_4_ch;
+extern channel sw_5_ch;
+extern channel sw_6_ch;
+extern channel tri_sw_a_ch;
+extern channel tri_sw_b_ch;
+
+
+
+
+void checkInputs();
+void setupInputs();
+float mapfloat(float x, float in_min, float in_max, float out_min, float out_max);
+float applyExpo(const float& input, const float& expo);
 
 
 

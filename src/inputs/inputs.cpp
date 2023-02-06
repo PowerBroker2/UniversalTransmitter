@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "OneButton.h"
 #include "TeensyTimerTool.h"
+#include "inputs.h"
 
 
 
@@ -13,25 +14,40 @@ using namespace TeensyTimerTool;
 /*
 * ****************** Switches ******************
 */
-extern const volatile int SW_1_PIN = 3;
-extern const volatile int SW_2_PIN = 4;
-extern const volatile int SW_3_PIN = 5;
-extern const volatile int SW_4_PIN = 6;
-extern const volatile int SW_5_PIN = 23;
-extern const volatile int SW_6_PIN = 22;
+extern const int SW_1_PIN = 3;
+extern const int SW_2_PIN = 4;
+extern const int SW_3_PIN = 5;
+extern const int SW_4_PIN = 6;
+extern const int SW_5_PIN = 23;
+extern const int SW_6_PIN = 22;
 
-extern const volatile int TRI_SW_A_PIN = 27;
-extern const volatile int TRI_SW_B_PIN = 28;
+extern const int TRI_SW_A_PIN = 27;
+extern const int TRI_SW_B_PIN = 28;
 
-volatile int sw_1_state = 0;
-volatile int sw_2_state = 0;
-volatile int sw_3_state = 0;
-volatile int sw_4_state = 0;
-volatile int sw_5_state = 0;
-volatile int sw_6_state = 0;
 
-volatile int tri_sw_a_state = 0;
-volatile int tri_sw_b_state = 0;
+
+
+channel sw_1_ch;
+channel sw_2_ch;
+channel sw_3_ch;
+channel sw_4_ch;
+channel sw_5_ch;
+channel sw_6_ch;
+channel tri_sw_a_ch;
+channel tri_sw_b_ch;
+
+
+
+
+int sw_1_state = 0;
+int sw_2_state = 0;
+int sw_3_state = 0;
+int sw_4_state = 0;
+int sw_5_state = 0;
+int sw_6_state = 0;
+
+int tri_sw_a_state = 0;
+int tri_sw_b_state = 0;
 
 volatile bool sw_1_switched;
 volatile bool sw_2_switched;
@@ -172,6 +188,38 @@ void setupSwitches()
 
 	attachInterrupt(TRI_SW_A_PIN, TRISWAISR, CHANGE);
 	attachInterrupt(TRI_SW_B_PIN, TRISWBISR, CHANGE);
+
+	sw_1_ch.setPinNum(SW_1_PIN);
+	sw_1_ch.setChNum(SW_1_CH);
+	sw_1_ch.setIsAn(false);
+
+	sw_2_ch.setPinNum(SW_2_PIN);
+	sw_2_ch.setChNum(SW_2_CH);
+	sw_2_ch.setIsAn(false);
+
+	sw_3_ch.setPinNum(SW_3_PIN);
+	sw_3_ch.setChNum(SW_3_CH);
+	sw_3_ch.setIsAn(false);
+
+	sw_4_ch.setPinNum(SW_4_PIN);
+	sw_4_ch.setChNum(SW_4_CH);
+	sw_4_ch.setIsAn(false);
+
+	sw_5_ch.setPinNum(SW_5_PIN);
+	sw_5_ch.setChNum(SW_5_CH);
+	sw_5_ch.setIsAn(false);
+
+	sw_6_ch.setPinNum(SW_6_PIN);
+	sw_6_ch.setChNum(SW_6_CH);
+	sw_6_ch.setIsAn(false);
+
+	tri_sw_a_ch.setPinNum(TRI_SW_A_PIN);
+	tri_sw_a_ch.setChNum(TRI_A_CH);
+	tri_sw_a_ch.setIsAn(false);
+
+	tri_sw_b_ch.setPinNum(TRI_SW_B_PIN);
+	tri_sw_b_ch.setChNum(TRI_B_CH);
+	tri_sw_b_ch.setIsAn(false);
 }
 
 
@@ -180,9 +228,6 @@ void setupSwitches()
 /*
 * ****************** Buttons ******************
 */
-extern const float TRIM_BTN_FREQ   = 1000; // Hz
-extern const float TRIM_BTN_PERIOD = 1.0 / TRIM_BTN_FREQ; // s
-
 extern const int PITCH_TRIM_UP_PIN      = 34;
 extern const int PITCH_TRIM_DOWN_PIN    = 33;
 extern const int ROLL_TRIM_RIGHT_PIN    = 31;
@@ -208,8 +253,6 @@ extern const float TRIM_UPDATE_VAL = 0.01;
 
 
 
-
-PeriodicTimer trimBtnTimer;
 
 OneButton pitch_trim_up = OneButton(
 	PITCH_TRIM_UP_PIN,    // Input pin for the button
@@ -341,8 +384,6 @@ void setupButtons()
 	yaw_trim_left.attachDuringLongPress(yaw_trim_left_long_click);
 	throttle_trim_up.attachDuringLongPress(throttle_trim_up_long_click);
 	throttle_trim_down.attachDuringLongPress(throttle_trim_down_long_click);
-
-	trimBtnTimer.begin(checkTrimBtns, TRIM_BTN_PERIOD * 1e6);
 }
 
 
@@ -351,6 +392,8 @@ void setupButtons()
 /*
 * ****************** Joysticks ******************
 */
+extern const int ANALOG_RESOLUTION = 12;
+
 extern const int PITCH_PIN    = A1; // Pin 15
 extern const int ROLL_PIN     = A0; // Pin 14
 extern const int YAW_PIN      = A2; // Pin 16
@@ -359,9 +402,72 @@ extern const int THROTTLE_PIN = A3; // Pin 17
 
 
 
+channel pitch_ch;
+channel roll_ch;
+channel yaw_ch;
+channel throttle_ch;
+
+
+
+
+volatile bool pitchReverse    = false;
+volatile bool rollReverse     = false;
+volatile bool yawReverse      = false;
+volatile bool throttleReverse = false;
+
+volatile float pitchExpo    = 0;
+volatile float rollExpo     = 0;
+volatile float yawExpo      = 0;
+volatile float throttleExpo = 0;
+
+volatile float pitchMixCh    = 0;
+volatile float rollMixCh     = 0;
+volatile float yawMixCh      = 0;
+volatile float throttleMixCh = 0;
+
+volatile float pitchMix    = 0;
+volatile float rollMix     = 0;
+volatile float yawMix      = 0;
+volatile float throttleMix = 0;
+
+volatile float pitchRaw    = 0;
+volatile float rollRaw     = 0;
+volatile float yawRaw      = 0;
+volatile float throttleRaw = 0;
+
+volatile float pitchWith_Reverse    = 0;
+volatile float rollWith_Reverse     = 0;
+volatile float yawWith_Reverse      = 0;
+volatile float throttleWith_Reverse = 0;
+
+volatile float pitchWith_Reverse_Expo    = 0;
+volatile float rollWith_Reverse_Expo     = 0;
+volatile float yawWith_Reverse_Expo      = 0;
+volatile float throttleWith_Reverse_Expo = 0;
+
+volatile float pitchWith_Reverse_Expo_Mix    = 0;
+volatile float rollWith_Reverse_Expo_Mix     = 0;
+volatile float yawWith_Reverse_Expo_Mix      = 0;
+volatile float throttleWith_Reverse_Expo_Mix = 0;
+
+
+
+
 void setupJoys()
 {
-	analogReadResolution(12);
+	analogReadResolution(ANALOG_RESOLUTION);
+
+	pitch_ch.setPinNum(PITCH_PIN);
+	pitch_ch.setChNum(PITCH_CH);
+
+	roll_ch.setPinNum(ROLL_PIN);
+	roll_ch.setChNum(ROLL_CH);
+
+	yaw_ch.setPinNum(YAW_PIN);
+	yaw_ch.setChNum(YAW_CH);
+
+	throttle_ch.setPinNum(THROTTLE_PIN);
+	throttle_ch.setChNum(THROTTLE_CH);
 }
 
 
@@ -376,9 +482,307 @@ extern const int KNOB_2_PIN = A16; // Pin 40
 
 
 
+channel knob1_ch;
+channel knob2_ch;
+
+
+
+
+volatile float knob1Raw = 0;
+volatile float knob2Raw = 0;
+
+volatile float knob1Expo = 0;
+volatile float knob2Expo = 0;
+
+volatile float knob1Mix = 0;
+volatile float knob2Mix = 0;
+
+
+
+
 void setupKnobs()
 {
-	analogReadResolution(12);
+	analogReadResolution(ANALOG_RESOLUTION);
+
+	knob1_ch.setPinNum(KNOB_1_PIN);
+	knob1_ch.setChNum(KNOB_1_CH);
+
+	knob2_ch.setPinNum(KNOB_2_PIN);
+	knob1_ch.setChNum(KNOB_2_CH);
+}
+
+
+
+
+/*
+* ****************** General ******************
+*/
+extern const float INPUT_MON_FREQ   = 200; // Hz
+extern const float INPUT_MON_PERIOD = 1.0 / INPUT_MON_FREQ; // s
+
+extern const int NUM_CHS = 12; // TODO: change to 14?
+
+extern const int PITCH_CH    = 0;
+extern const int ROLL_CH     = 1;
+extern const int YAW_CH      = 2;
+extern const int THROTTLE_CH = 3;
+extern const int KNOB_1_CH   = 4;
+extern const int KNOB_2_CH   = 5;
+extern const int SW_1_CH     = 6;
+extern const int SW_2_CH     = 7;
+extern const int SW_3_CH     = 8;
+extern const int SW_4_CH     = 9;
+extern const int SW_5_CH     = 10;
+extern const int SW_6_CH     = 11;
+extern const int TRI_A_CH    = 12;
+extern const int TRI_B_CH    = 13;
+
+extern const float ABSOLUTE_CH_MAX =  2.0;
+extern const float ABSOLUTE_CH_MIN = -2.0;
+extern const float CH_MAX          =  1.0;
+extern const float CH_MIN          = -1.0;
+
+extern const float EXPO_MAX = 100.0;
+extern const float EXPO_MIN = 0.0;
+
+extern const float MIX_MAX = 100.0;
+extern const float MIX_MIN = 0.0;
+
+
+
+
+PeriodicTimer checkInputsTimer;
+
+
+
+
+void channel::setPinNum(const int& _pinNum)
+{
+	if (_pinNum >= 0)
+		pinNum = _pinNum;
+}
+
+int channel::getPinNum()
+{
+	return pinNum;
+}
+
+void channel::setChNum(const int& _chNum)
+{
+	if ((_chNum >= 0) && (_chNum < NUM_CHS))
+		chNum = _chNum;
+}
+
+int channel::getChNum()
+{
+	return chNum;
+}
+
+void channel::setIsAn(const bool& _isAnalog)
+{
+	isAnalog = _isAnalog;
+}
+
+bool channel::getIsAn()
+{
+	return isAnalog;
+}
+
+void channel::setMaxADC(const int& _maxADC)
+{
+	if (_maxADC >= 0)
+		maxADC = _maxADC;
+}
+
+int channel::getMaxADC()
+{
+	return maxADC;
+}
+
+void channel::setMinADC(const int& _minADC)
+{
+	if (_minADC >= 0)
+		minADC = _minADC;
+}
+
+int channel::getMinADC()
+{
+	return minADC;
+}
+
+void channel::setMixChNum(const int& _mixChNum)
+{
+	if ((_mixChNum >= 0) && (_mixChNum < NUM_CHS))
+		mixChNum = _mixChNum;
+}
+
+float channel::getMixChNum()
+{
+	return mixChNum;
+}
+
+void channel::setMix(const float& _mixVal)
+{
+	mixVal = constrain(_mixVal, MIX_MIN, MIX_MAX);
+}
+
+float channel::getMix()
+{
+	return mixVal;
+}
+
+void channel::setReverse(const bool& _reverse)
+{
+	reverse = _reverse;
+}
+
+bool channel::getReverse()
+{
+	return reverse;
+}
+
+void channel::setExpo(const float& _expo)
+{
+	expo = constrain(_expo, EXPO_MIN, EXPO_MAX);
+}
+
+float channel::getExpo()
+{
+	return expo;
+}
+
+void channel::update()
+{
+	if (isAnalog)
+		raw = constrain(mapfloat(analogRead(pinNum), minADC, maxADC, CH_MIN, CH_MAX), CH_MIN, CH_MAX);
+	else
+		raw = (float)digitalReadFast(pinNum);
+
+	reversed = raw;
+
+	if (reverse)
+	{
+		if (isAnalog)
+			reversed *= -1;
+		else
+		{
+			if (reversed >= 0.5)
+				reversed = 0;
+			else
+				reversed = 1;
+		}
+	}
+	
+	reversed_expo = constrain(applyExpo(reversed, expo), CH_MIN, CH_MAX);
+
+	if (useLowRate)
+		reversed_expo *= lowRate;
+	else
+		reversed_expo *= highRate;
+}
+
+float channel::getRaw()
+{
+	return raw;
+}
+
+float channel::getReversed()
+{
+	return reversed;
+}
+
+float channel::getReversed_expo()
+{
+	return reversed_expo;
+}
+
+void channel::useHighRates()
+{
+	useLowRate = false;
+}
+
+void channel::setHighRate(const float& _highRate)
+{
+	if ((_highRate > 0) && (_highRate >= 1))
+		highRate = _highRate;
+}
+
+float channel::getHighRate()
+{
+	return highRate;
+}
+
+void channel::useLowRates()
+{
+	useLowRate = true;
+}
+
+void channel::setLowRate(const float& _lowRate)
+{
+	if ((_lowRate > 0) && (_lowRate >= 1))
+		lowRate = _lowRate;
+}
+
+float channel::getLowRate()
+{
+	return lowRate;
+}
+
+
+
+
+void checkInputs()
+{
+	checkTrimBtns();
+
+	pitch_ch.update();
+	roll_ch.update();
+	yaw_ch.update();
+	throttle_ch.update();
+	knob1_ch.update();
+	knob2_ch.update();
+	sw_1_ch.update();
+	sw_2_ch.update();
+	sw_3_ch.update();
+	sw_4_ch.update();
+	sw_5_ch.update();
+	sw_6_ch.update();
+	tri_sw_a_ch.update();
+	tri_sw_b_ch.update();
+}
+
+
+
+
+void setupInputs()
+{
+	setupSwitches();
+	setupButtons();
+	setupJoys();
+	setupKnobs();
+
+	checkInputsTimer.begin(checkInputs, INPUT_MON_PERIOD * 1e6);
+}
+
+
+
+
+float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+
+
+
+float applyExpo(const float& input, const float& expo)
+{
+  // https://www.rcgroups.com/forums/showthread.php?375044-what-is-the-formula-for-the-expo-function/page2
+  // https://www.desmos.com/calculator/5wktdeykaj
+
+  float output = -(((1.0 - ((100.0 - expo) / 100.0)) * pow(input, 3.0)) + (input * ((100.0 - expo) / 100.0)));
+
+  return constrain(output, -1.0, 1.0);
 }
 
 
