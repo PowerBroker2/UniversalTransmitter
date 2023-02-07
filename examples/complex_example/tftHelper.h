@@ -375,79 +375,95 @@ void updateMenu()
 
   if (ioMonFlag)
   {
-    noInterrupts();
-    
     if (myController.sw1SwitchFlag())
     {
       myController.clearSw1SwitchFlag();
+      
+      noInterrupts();
       sw1StateArea.clearText();
       sprintf(sw1StateArea.text, "SW 1: %d", (int)round(myController.sw1State()));
       sw1StateArea.drawText();
+      interrupts();
     }
     
     if (myController.sw2SwitchFlag())
     {
       myController.clearSw2SwitchFlag();
       
+      noInterrupts();
       sw2StateArea.clearText();
       sprintf(sw2StateArea.text, "SW 2: %d", (int)round(myController.sw2State()));
       sw2StateArea.drawText();
+      interrupts();
     }
     
     if (myController.sw3SwitchFlag())
     {
       myController.clearSw3SwitchFlag();
       
+      noInterrupts();
       sw3StateArea.clearText();
       sprintf(sw3StateArea.text, "SW 3: %d", (int)round(myController.sw3State()));
       sw3StateArea.drawText();
+      interrupts();
     }
     
     if (myController.sw4SwitchFlag())
     {
       myController.clearSw4SwitchFlag();
       
+      noInterrupts();
       sw4StateArea.clearText();
       sprintf(sw4StateArea.text, "SW 4: %d", (int)round(myController.sw4State()));
       sw4StateArea.drawText();
+      interrupts();
     }
     
     if (myController.sw5SwitchFlag())
     {
       myController.clearSw5SwitchFlag();
       
+      noInterrupts();
       sw5StateArea.clearText();
       sprintf(sw5StateArea.text, "SW 5: %d", (int)round(myController.sw5State()));
       sw5StateArea.drawText();
+      interrupts();
     }
     
     if (myController.sw6SwitchFlag())
     {
       myController.clearSw6SwitchFlag();
       
+      noInterrupts();
       sw6StateArea.clearText();
       sprintf(sw6StateArea.text, "SW 6: %d", (int)round(myController.sw6State()));
       sw6StateArea.drawText();
+      interrupts();
     }
     
     if (myController.triSwASwitchFlag())
     {
       myController.clearTriSwASwitchFlag();
       
+      noInterrupts();
       triSwAStateArea.clearText();
       sprintf(triSwAStateArea.text, "TSW A: %d", (int)round(myController.triSwAState()));
       triSwAStateArea.drawText();
+      interrupts();
     }
     
     if (myController.triSwBSwitchFlag())
     {
       myController.clearTriSwBSwitchFlag();
       
+      noInterrupts();
       triSwBStateArea.clearText();
       sprintf(triSwBStateArea.text, "TSW B: %d", (int)round(myController.triSwBState()));
       triSwBStateArea.drawText();
+      interrupts();
     }
     
+    noInterrupts();
     pitchJoyArea.clearText();
     dtostrf(myController.pitchJoy(), 4, 2, tempStr);
     sprintf(pitchJoyArea.text, "Pitch: %s", tempStr);
@@ -497,9 +513,11 @@ void updateMenu()
     dtostrf(myController.loadVoltage(), 4, 2, tempStr);
     sprintf(loadVoltageArea.text, "Load: %s", tempStr);
     loadVoltageArea.drawText();
+    interrupts();
 
     if (myController.numBuddyChannels() == SW_3_CH)
     {
+      noInterrupts();
       buddy1Area.clearText();
       sprintf(buddy1Area.text, "Bud 1: %d", myController.buddyChannel(0));
       buddy1Area.drawText();
@@ -531,9 +549,8 @@ void updateMenu()
       buddy8Area.clearText();
       sprintf(buddy8Area.text, "Bud 8: %d", myController.buddyChannel(7));
       buddy8Area.drawText();
+      interrupts();
     }
-    
-    interrupts();
   }
 
   if (chEditFlag)
@@ -541,8 +558,8 @@ void updateMenu()
     if (chReverseChangeFlag || chChangeFlag || expoChangeFlag)
     {
       noInterrupts();
-      
       chExpoGraphArea.draw();
+      interrupts();
       
       float expo = 0;
       
@@ -598,18 +615,16 @@ void updateMenu()
           input = mapfloat(i, 0.0, chExpoGraphArea.w - 2.0, -1.0, 1.0);
         
         int row = (int)((chExpoGraphArea.h / 2.0) * myController.expo(input, expo)) + chExpoGraphArea.startRow + (int)(chExpoGraphArea.h / 2);
-    
+
+        noInterrupts();
         tft.drawPixel(col, row, ILI9341_WHITE);
+        interrupts();
       }
-      
-      interrupts();
     }
     
     if (chReverseChangeFlag || chChangeFlag)
     {
       chReverseChangeFlag = false;
-      
-      noInterrupts();
       
       if (((chVal == PITCH_CH)    && myController.getPitchReverse())    ||
           ((chVal == ROLL_CH)     && myController.getRollReverse())     ||
@@ -632,10 +647,10 @@ void updateMenu()
         chReverseChangeArea.pixMap    = xButtonPixMap;
         chReverseChangeArea.alphaMask = xButtonAlphaMask;
       }
-  
+
+      noInterrupts();
       chReverseChangeArea.clear();
       chReverseChangeArea.draw();
-      
       interrupts();
     }
 
@@ -644,7 +659,6 @@ void updateMenu()
       expoChangeFlag = false;
       
       noInterrupts();
-      
       chExpoArea.clearText();
   
       if (chVal == PITCH_CH)
@@ -663,7 +677,6 @@ void updateMenu()
         sprintf(chExpoArea.text, "Expo: %d", 0);
       
       chExpoArea.drawText();
-      
       interrupts();
     }
     
@@ -672,7 +685,6 @@ void updateMenu()
       chChangeFlag = false;
     
       noInterrupts();
-  
       chEditNumArea.clear();
       
       if (chVal == PITCH_CH)
@@ -701,7 +713,6 @@ void updateMenu()
         sprintf(chEditNumArea.text, "SW6");
   
       chEditNumArea.draw();
-      
       interrupts();
     }
   }
@@ -712,7 +723,6 @@ void updateMenu()
     chMixSecondChangeFlag = true; // Need to reset other channel text
   
     noInterrupts();
-
     chMixFirstNumArea.clear();
     
     if (chVal1Mix == PITCH_CH)
@@ -777,7 +787,6 @@ void updateMenu()
     }
 
     chMixFirstNumArea.draw();
-    
     interrupts();
   }
 
@@ -786,7 +795,6 @@ void updateMenu()
     chMixValChangeFlag = false;
   
     noInterrupts();
-    
     chMixArea.clearText();
     
     if (chVal1Mix == PITCH_CH)
@@ -815,7 +823,6 @@ void updateMenu()
       sprintf(chMixArea.text, "Mix: %d", (int)myController.getSw6Mix());
     
     chMixArea.drawText();
-
     interrupts();
   }
   
@@ -824,7 +831,6 @@ void updateMenu()
     chMixSecondChangeFlag = false;
   
     noInterrupts();
-
     chMixSecondNumArea.clear();
 
     if (chVal2Mix == PITCH_CH)
@@ -853,7 +859,6 @@ void updateMenu()
       sprintf(chMixSecondNumArea.text, "SW6");
 
     chMixSecondNumArea.draw();
-    
     interrupts();
   }
 }
@@ -871,9 +876,6 @@ void initMenu()
   noInterrupts();
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(2);
-  interrupts();
-  
-  noInterrupts();
   tft.fillScreen(ILI9341_NAVY);
   interrupts();
   
@@ -1766,6 +1768,7 @@ FASTRUN void whenTouched()
             chExpoGraphArea.draw();
             chExpoUpArea.draw();
             chExpoDownArea.draw();
+            interrupts();
 
             float expo = 0;
             
@@ -1821,11 +1824,11 @@ FASTRUN void whenTouched()
                 input = mapfloat(i, 0.0, chExpoGraphArea.w - 2.0, -1.0, 1.0);
               
               int row = (int)((chExpoGraphArea.h / 2.0) * myController.expo(input, expo)) + chExpoGraphArea.startRow + (int)(chExpoGraphArea.h / 2);
-          
+
+              noInterrupts();
               tft.drawPixel(col, row, ILI9341_WHITE);
+              interrupts();
             }
-            
-            interrupts();
           }
 
           if (chEditNumUpArea.inArea(y, x))
