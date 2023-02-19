@@ -13,7 +13,7 @@ This is an open-source, Arduino-based handheld transmitter. This handheld transm
 - 5 [toggle switches](https://www.amazon.com/gp/product/B079JBF815/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 - 1 [tri-state switch](https://www.amazon.com/gp/product/B07QC6T4GW/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 - 1 [speaker](https://www.amazon.com/gp/product/B0738NLFTG/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
-  - Can be controlled with a DFPlayerMini or I2S
+  - Can be controlled with a [DFPlayerMini](https://www.amazon.com/gp/product/B089D5NLW1/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1) or [I2S module](https://www.amazon.com/gp/product/B07PS653CD/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
   - 1 [volume knob](https://www.amazon.com/gp/product/B07B64MWRF/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
 - 2 power supplies
   - Can use battery pack or external power via [5.5mm barrel jack](https://www.amazon.com/gp/product/B08SJM2G52/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1)
