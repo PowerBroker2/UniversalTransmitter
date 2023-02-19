@@ -1,5 +1,5 @@
 # UniversalTransmitter
-
+[![GitHub version](https://badge.fury.io/gh/PowerBroker2%2FUniversalTransmitter.svg)](https://badge.fury.io/gh/PowerBroker2%2FUniversalTransmitter) [![arduino-library-badge](https://www.ardu-badge.com/badge/UniversalTransmitter.svg?)](https://www.ardu-badge.com/UniversalTransmitter)<br /><br />
 This is an open-source, Arduino-based handheld transmitter. This handheld transmitter can be used in any robotics application that requires user input (i.e., RC car, RC airplane, robotic arm, etc.) and includes the following features:
 
 - Teensy 4.1 microcontroller
