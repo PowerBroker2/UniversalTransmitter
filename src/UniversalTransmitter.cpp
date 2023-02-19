@@ -1,4 +1,4 @@
-#include "UniversalController.h"
+#include "UniversalTransmitter.h"
 #include "buddy/buddy.h"
 #include "display/display.h"
 #include "inputs/inputs.h"
@@ -9,7 +9,7 @@
 
 
 
-void UniversalController::begin()
+void UniversalTransmitter::begin()
 {
   Serial.begin(2000000);
 
@@ -23,7 +23,7 @@ void UniversalController::begin()
 
 
 
-int UniversalController::numBuddyChannels()
+int UniversalTransmitter::numBuddyChannels()
 {
   return max_channel_num;
 }
@@ -31,7 +31,7 @@ int UniversalController::numBuddyChannels()
 
 
 
-int UniversalController::buddyChannel(const int& channelNum)
+int UniversalTransmitter::buddyChannel(const int& channelNum)
 {
   if (channelNum < MAX_CHANNELS)
   {
@@ -44,7 +44,7 @@ int UniversalController::buddyChannel(const int& channelNum)
 
 
 
-float UniversalController::sw1State()
+float UniversalTransmitter::sw1State()
 {
   return getVal(sw_1_ch);
 }
@@ -52,7 +52,7 @@ float UniversalController::sw1State()
 
 
 
-float UniversalController::sw2State()
+float UniversalTransmitter::sw2State()
 {
   return getVal(sw_2_ch);
 }
@@ -60,7 +60,7 @@ float UniversalController::sw2State()
 
 
 
-float UniversalController::sw3State()
+float UniversalTransmitter::sw3State()
 {
   return getVal(sw_3_ch);
 }
@@ -68,7 +68,7 @@ float UniversalController::sw3State()
 
 
 
-float UniversalController::sw4State()
+float UniversalTransmitter::sw4State()
 {
   return getVal(sw_4_ch);
 }
@@ -76,7 +76,7 @@ float UniversalController::sw4State()
 
 
 
-float UniversalController::sw5State()
+float UniversalTransmitter::sw5State()
 {
   return getVal(sw_5_ch);
 }
@@ -84,7 +84,7 @@ float UniversalController::sw5State()
 
 
 
-float UniversalController::sw6State()
+float UniversalTransmitter::sw6State()
 {
   return getVal(sw_6_ch);
 }
@@ -92,7 +92,7 @@ float UniversalController::sw6State()
 
 
 
-float UniversalController::triSwAState()
+float UniversalTransmitter::triSwAState()
 {
   return getVal(tri_sw_a_ch);
 }
@@ -100,7 +100,7 @@ float UniversalController::triSwAState()
 
 
 
-float UniversalController::triSwBState()
+float UniversalTransmitter::triSwBState()
 {
   return getVal(tri_sw_b_ch);
 }
@@ -108,7 +108,7 @@ float UniversalController::triSwBState()
 
 
 
-bool UniversalController::sw1SwitchFlag()
+bool UniversalTransmitter::sw1SwitchFlag()
 {
   return sw_1_switched;
 }
@@ -116,7 +116,7 @@ bool UniversalController::sw1SwitchFlag()
 
 
 
-bool UniversalController::sw2SwitchFlag()
+bool UniversalTransmitter::sw2SwitchFlag()
 {
   return sw_2_switched;
 }
@@ -124,7 +124,7 @@ bool UniversalController::sw2SwitchFlag()
 
 
 
-bool UniversalController::sw3SwitchFlag()
+bool UniversalTransmitter::sw3SwitchFlag()
 {
   return sw_3_switched;
 }
@@ -132,7 +132,7 @@ bool UniversalController::sw3SwitchFlag()
 
 
 
-bool UniversalController::sw4SwitchFlag()
+bool UniversalTransmitter::sw4SwitchFlag()
 {
   return sw_4_switched;
 }
@@ -140,7 +140,7 @@ bool UniversalController::sw4SwitchFlag()
 
 
 
-bool UniversalController::sw5SwitchFlag()
+bool UniversalTransmitter::sw5SwitchFlag()
 {
   return sw_5_switched;
 }
@@ -148,7 +148,7 @@ bool UniversalController::sw5SwitchFlag()
 
 
 
-bool UniversalController::sw6SwitchFlag()
+bool UniversalTransmitter::sw6SwitchFlag()
 {
   return sw_6_switched;
 }
@@ -156,7 +156,7 @@ bool UniversalController::sw6SwitchFlag()
 
 
 
-bool UniversalController::triSwASwitchFlag()
+bool UniversalTransmitter::triSwASwitchFlag()
 {
   return tri_sw_a_switched;
 }
@@ -164,7 +164,7 @@ bool UniversalController::triSwASwitchFlag()
 
 
 
-bool UniversalController::triSwBSwitchFlag()
+bool UniversalTransmitter::triSwBSwitchFlag()
 {
   return tri_sw_b_switched;
 }
@@ -172,7 +172,7 @@ bool UniversalController::triSwBSwitchFlag()
 
 
 
-void UniversalController::clearSw1SwitchFlag()
+void UniversalTransmitter::clearSw1SwitchFlag()
 {
   sw_1_switched = false;
 }
@@ -180,7 +180,7 @@ void UniversalController::clearSw1SwitchFlag()
 
 
 
-void UniversalController::clearSw2SwitchFlag()
+void UniversalTransmitter::clearSw2SwitchFlag()
 {
   sw_2_switched = false;
 }
@@ -188,7 +188,7 @@ void UniversalController::clearSw2SwitchFlag()
 
 
 
-void UniversalController::clearSw3SwitchFlag()
+void UniversalTransmitter::clearSw3SwitchFlag()
 {
   sw_3_switched = false;
 }
@@ -196,7 +196,7 @@ void UniversalController::clearSw3SwitchFlag()
 
 
 
-void UniversalController::clearSw4SwitchFlag()
+void UniversalTransmitter::clearSw4SwitchFlag()
 {
   sw_4_switched = false;
 }
@@ -204,7 +204,7 @@ void UniversalController::clearSw4SwitchFlag()
 
 
 
-void UniversalController::clearSw5SwitchFlag()
+void UniversalTransmitter::clearSw5SwitchFlag()
 {
   sw_5_switched = false;
 }
@@ -212,7 +212,7 @@ void UniversalController::clearSw5SwitchFlag()
 
 
 
-void UniversalController::clearSw6SwitchFlag()
+void UniversalTransmitter::clearSw6SwitchFlag()
 {
   sw_6_switched = false;
 }
@@ -220,7 +220,7 @@ void UniversalController::clearSw6SwitchFlag()
 
 
 
-void UniversalController::clearTriSwASwitchFlag()
+void UniversalTransmitter::clearTriSwASwitchFlag()
 {
   tri_sw_a_switched = false;
 }
@@ -228,7 +228,7 @@ void UniversalController::clearTriSwASwitchFlag()
 
 
 
-void UniversalController::clearTriSwBSwitchFlag()
+void UniversalTransmitter::clearTriSwBSwitchFlag()
 {
   tri_sw_b_switched = false;
 }
@@ -236,7 +236,7 @@ void UniversalController::clearTriSwBSwitchFlag()
 
 
 
-void UniversalController::setPitchTrim(const float& trim)
+void UniversalTransmitter::setPitchTrim(const float& trim)
 {
   pitchTrimVal = constrain(trim - fmod(pitchTrimVal, TRIM_UPDATE_VAL), MIN_PITCH_TRIM, MAX_PITCH_TRIM);
 }
@@ -244,7 +244,7 @@ void UniversalController::setPitchTrim(const float& trim)
 
 
 
-void UniversalController::setRollTrim(const float& trim)
+void UniversalTransmitter::setRollTrim(const float& trim)
 {
   rollTrimVal = constrain(trim - fmod(rollTrimVal, TRIM_UPDATE_VAL), MIN_ROLL_TRIM, MAX_ROLL_TRIM);
 }
@@ -252,7 +252,7 @@ void UniversalController::setRollTrim(const float& trim)
 
 
 
-void UniversalController::setYawTrim(const float& trim)
+void UniversalTransmitter::setYawTrim(const float& trim)
 {
   yawTrimVal = constrain(trim - fmod(yawTrimVal, TRIM_UPDATE_VAL), MIN_YAW_TRIM, MAX_YAW_TRIM);
 }
@@ -260,7 +260,7 @@ void UniversalController::setYawTrim(const float& trim)
 
 
 
-void UniversalController::setThrottleTrim(const float& trim)
+void UniversalTransmitter::setThrottleTrim(const float& trim)
 {
   throttleTrimVal = constrain(trim - fmod(throttleTrimVal, TRIM_UPDATE_VAL), MIN_THROTTLE_TRIM, MAX_THROTTLE_TRIM);
 }
@@ -268,7 +268,7 @@ void UniversalController::setThrottleTrim(const float& trim)
 
 
 
-float UniversalController::pitchTrim()
+float UniversalTransmitter::pitchTrim()
 {
   return pitchTrimVal;
 }
@@ -276,7 +276,7 @@ float UniversalController::pitchTrim()
 
 
 
-float UniversalController::rollTrim()
+float UniversalTransmitter::rollTrim()
 {
   return rollTrimVal;
 }
@@ -284,7 +284,7 @@ float UniversalController::rollTrim()
 
 
 
-float UniversalController::yawTrim()
+float UniversalTransmitter::yawTrim()
 {
   return yawTrimVal;
 }
@@ -292,7 +292,7 @@ float UniversalController::yawTrim()
 
 
 
-float UniversalController::throttleTrim()
+float UniversalTransmitter::throttleTrim()
 {
   return throttleTrimVal;
 }
@@ -300,7 +300,7 @@ float UniversalController::throttleTrim()
 
 
 
-bool UniversalController::pitchTrimFlag()
+bool UniversalTransmitter::pitchTrimFlag()
 {
   return pitchTrimValUpdated;
 }
@@ -308,7 +308,7 @@ bool UniversalController::pitchTrimFlag()
 
 
 
-bool UniversalController::rollTrimFlag()
+bool UniversalTransmitter::rollTrimFlag()
 {
   return rollTrimValUpdated;
 }
@@ -316,7 +316,7 @@ bool UniversalController::rollTrimFlag()
 
 
 
-bool UniversalController::yawTrimFlag()
+bool UniversalTransmitter::yawTrimFlag()
 {
   return yawTrimValUpdated;
 }
@@ -324,7 +324,7 @@ bool UniversalController::yawTrimFlag()
 
 
 
-bool UniversalController::throttleTrimFlag()
+bool UniversalTransmitter::throttleTrimFlag()
 {
   return throttleTrimValUpdated;
 }
@@ -332,7 +332,7 @@ bool UniversalController::throttleTrimFlag()
 
 
 
-void UniversalController::clearPitchTrimFlag()
+void UniversalTransmitter::clearPitchTrimFlag()
 {
   pitchTrimValUpdated = false;
 }
@@ -340,7 +340,7 @@ void UniversalController::clearPitchTrimFlag()
 
 
 
-void UniversalController::clearRollTrimFlag()
+void UniversalTransmitter::clearRollTrimFlag()
 {
   rollTrimValUpdated = false;
 }
@@ -348,7 +348,7 @@ void UniversalController::clearRollTrimFlag()
 
 
 
-void UniversalController::clearYawTrimFlag()
+void UniversalTransmitter::clearYawTrimFlag()
 {
   yawTrimValUpdated = false;
 }
@@ -356,7 +356,7 @@ void UniversalController::clearYawTrimFlag()
 
 
 
-void UniversalController::clearThrottleTrimFlag()
+void UniversalTransmitter::clearThrottleTrimFlag()
 {
   throttleTrimValUpdated = false;
 }
@@ -364,7 +364,7 @@ void UniversalController::clearThrottleTrimFlag()
 
 
 
-void UniversalController::setPitchADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setPitchADCLimits(const int& minADC, const int& maxADC)
 {
   pitch_ch.setMinADC(minADC);
   pitch_ch.setMaxADC(maxADC);
@@ -373,7 +373,7 @@ void UniversalController::setPitchADCLimits(const int& minADC, const int& maxADC
 
 
 
-void UniversalController::setRollADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setRollADCLimits(const int& minADC, const int& maxADC)
 {
   roll_ch.setMinADC(minADC);
   roll_ch.setMaxADC(maxADC);
@@ -382,7 +382,7 @@ void UniversalController::setRollADCLimits(const int& minADC, const int& maxADC)
 
 
 
-void UniversalController::setYawADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setYawADCLimits(const int& minADC, const int& maxADC)
 {
   yaw_ch.setMinADC(minADC);
   yaw_ch.setMaxADC(maxADC);
@@ -391,7 +391,7 @@ void UniversalController::setYawADCLimits(const int& minADC, const int& maxADC)
 
 
 
-void UniversalController::setThrottleADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setThrottleADCLimits(const int& minADC, const int& maxADC)
 {
   throttle_ch.setMinADC(minADC);
   throttle_ch.setMaxADC(maxADC);
@@ -400,7 +400,7 @@ void UniversalController::setThrottleADCLimits(const int& minADC, const int& max
 
 
 
-void UniversalController::setKnob1ADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setKnob1ADCLimits(const int& minADC, const int& maxADC)
 {
   knob1_ch.setMinADC(minADC);
   knob1_ch.setMaxADC(maxADC);
@@ -409,7 +409,7 @@ void UniversalController::setKnob1ADCLimits(const int& minADC, const int& maxADC
 
 
 
-void UniversalController::setKnob2ADCLimits(const int& minADC, const int& maxADC)
+void UniversalTransmitter::setKnob2ADCLimits(const int& minADC, const int& maxADC)
 {
   knob2_ch.setMinADC(minADC);
   knob2_ch.setMaxADC(maxADC);
@@ -418,7 +418,7 @@ void UniversalController::setKnob2ADCLimits(const int& minADC, const int& maxADC
 
 
 
-int UniversalController::minPitchADC()
+int UniversalTransmitter::minPitchADC()
 {
   return pitch_ch.getMinADC();
 }
@@ -426,7 +426,7 @@ int UniversalController::minPitchADC()
 
 
 
-int UniversalController::maxPitchADC()
+int UniversalTransmitter::maxPitchADC()
 {
   return pitch_ch.getMaxADC();
 }
@@ -434,7 +434,7 @@ int UniversalController::maxPitchADC()
 
 
 
-int UniversalController::minRollADC()
+int UniversalTransmitter::minRollADC()
 {
   return roll_ch.getMinADC();
 }
@@ -442,7 +442,7 @@ int UniversalController::minRollADC()
 
 
 
-int UniversalController::maxRollADC()
+int UniversalTransmitter::maxRollADC()
 {
   return roll_ch.getMaxADC();
 }
@@ -450,7 +450,7 @@ int UniversalController::maxRollADC()
 
 
 
-int UniversalController::minYawADC()
+int UniversalTransmitter::minYawADC()
 {
   return yaw_ch.getMinADC();
 }
@@ -458,7 +458,7 @@ int UniversalController::minYawADC()
 
 
 
-int UniversalController::maxYawADC()
+int UniversalTransmitter::maxYawADC()
 {
   return yaw_ch.getMaxADC();
 }
@@ -466,7 +466,7 @@ int UniversalController::maxYawADC()
 
 
 
-int UniversalController::minThrottleADC()
+int UniversalTransmitter::minThrottleADC()
 {
   return throttle_ch.getMinADC();
 }
@@ -474,7 +474,7 @@ int UniversalController::minThrottleADC()
 
 
 
-int UniversalController::maxThrottleADC()
+int UniversalTransmitter::maxThrottleADC()
 {
   return throttle_ch.getMaxADC();
 }
@@ -482,7 +482,7 @@ int UniversalController::maxThrottleADC()
 
 
 
-int UniversalController::minKnob1ADC()
+int UniversalTransmitter::minKnob1ADC()
 {
   return knob1_ch.getMinADC();
 }
@@ -490,7 +490,7 @@ int UniversalController::minKnob1ADC()
 
 
 
-int UniversalController::maxKnob1ADC()
+int UniversalTransmitter::maxKnob1ADC()
 {
   return knob1_ch.getMaxADC();
 }
@@ -498,7 +498,7 @@ int UniversalController::maxKnob1ADC()
 
 
 
-int UniversalController::minKnob2ADC()
+int UniversalTransmitter::minKnob2ADC()
 {
   return knob2_ch.getMinADC();
 }
@@ -506,7 +506,7 @@ int UniversalController::minKnob2ADC()
 
 
 
-int UniversalController::maxKnob2ADC()
+int UniversalTransmitter::maxKnob2ADC()
 {
   return knob2_ch.getMaxADC();
 }
@@ -514,7 +514,7 @@ int UniversalController::maxKnob2ADC()
 
 
 
-float UniversalController::getVal(channel& inputCh)
+float UniversalTransmitter::getVal(channel& inputCh)
 {
   float output   = inputCh.getReversed_expo();
   int   mixChNum = inputCh.getMixChNum();
@@ -555,7 +555,7 @@ float UniversalController::getVal(channel& inputCh)
 
 
 
-float UniversalController::pitchJoy()
+float UniversalTransmitter::pitchJoy()
 {
   return getVal(pitch_ch);
 }
@@ -563,7 +563,7 @@ float UniversalController::pitchJoy()
 
 
 
-float UniversalController::rollJoy()
+float UniversalTransmitter::rollJoy()
 {
   return getVal(roll_ch);
 }
@@ -571,7 +571,7 @@ float UniversalController::rollJoy()
 
 
 
-float UniversalController::yawJoy()
+float UniversalTransmitter::yawJoy()
 {
   return getVal(yaw_ch);
 }
@@ -579,7 +579,7 @@ float UniversalController::yawJoy()
 
 
 
-float UniversalController::throttleJoy()
+float UniversalTransmitter::throttleJoy()
 {
   return getVal(throttle_ch);
 }
@@ -587,7 +587,7 @@ float UniversalController::throttleJoy()
 
 
 
-float UniversalController::knob1()
+float UniversalTransmitter::knob1()
 {
   return getVal(knob1_ch);
 }
@@ -595,7 +595,7 @@ float UniversalController::knob1()
 
 
 
-float UniversalController::knob2()
+float UniversalTransmitter::knob2()
 {
   return getVal(knob2_ch);
 }
@@ -603,7 +603,7 @@ float UniversalController::knob2()
 
 
 
-void  UniversalController::useHighRates()
+void  UniversalTransmitter::useHighRates()
 {
   pitch_ch.useHighRates();
 	roll_ch.useHighRates();
@@ -613,7 +613,7 @@ void  UniversalController::useHighRates()
 
 
 
-void  UniversalController::setHighRates(const float& rate)
+void  UniversalTransmitter::setHighRates(const float& rate)
 {
   pitch_ch.setHighRate(rate);
 	roll_ch.setHighRate(rate);
@@ -623,7 +623,7 @@ void  UniversalController::setHighRates(const float& rate)
 
 
 
-float UniversalController::getHighRates()
+float UniversalTransmitter::getHighRates()
 {
   return pitch_ch.getHighRate();
 }
@@ -631,7 +631,7 @@ float UniversalController::getHighRates()
 
 
 
-void  UniversalController::useLowRates()
+void  UniversalTransmitter::useLowRates()
 {
   pitch_ch.useLowRates();
 	roll_ch.useLowRates();
@@ -641,7 +641,7 @@ void  UniversalController::useLowRates()
 
 
 
-void  UniversalController::setLowRates(const float& rate)
+void  UniversalTransmitter::setLowRates(const float& rate)
 {
   pitch_ch.setLowRate(rate);
 	roll_ch.setLowRate(rate);
@@ -651,7 +651,7 @@ void  UniversalController::setLowRates(const float& rate)
 
 
 
-float UniversalController::getLowRates()
+float UniversalTransmitter::getLowRates()
 {
   return pitch_ch.getLowRate();
 }
@@ -659,7 +659,7 @@ float UniversalController::getLowRates()
 
 
 
-void UniversalController::setPitchExpo(const float& _expo)
+void UniversalTransmitter::setPitchExpo(const float& _expo)
 {
   pitch_ch.setExpo(_expo);
 }
@@ -667,7 +667,7 @@ void UniversalController::setPitchExpo(const float& _expo)
 
 
 
-void UniversalController::setRollExpo(const float& _expo)
+void UniversalTransmitter::setRollExpo(const float& _expo)
 {
   roll_ch.setExpo(_expo);
 }
@@ -675,7 +675,7 @@ void UniversalController::setRollExpo(const float& _expo)
 
 
 
-void UniversalController::setYawExpo(const float& _expo)
+void UniversalTransmitter::setYawExpo(const float& _expo)
 {
   yaw_ch.setExpo(_expo);
 }
@@ -683,7 +683,7 @@ void UniversalController::setYawExpo(const float& _expo)
 
 
 
-void UniversalController::setThrottleExpo(const float& _expo)
+void UniversalTransmitter::setThrottleExpo(const float& _expo)
 {
   throttle_ch.setExpo(_expo);
 }
@@ -691,7 +691,7 @@ void UniversalController::setThrottleExpo(const float& _expo)
 
 
 
-void UniversalController::setKnob1Expo(const float& _expo)
+void UniversalTransmitter::setKnob1Expo(const float& _expo)
 {
   knob1_ch.setExpo(_expo);
 }
@@ -699,7 +699,7 @@ void UniversalController::setKnob1Expo(const float& _expo)
 
 
 
-void UniversalController::setKnob2Expo(const float& _expo)
+void UniversalTransmitter::setKnob2Expo(const float& _expo)
 {
   knob2_ch.setExpo(_expo);
 }
@@ -707,7 +707,7 @@ void UniversalController::setKnob2Expo(const float& _expo)
 
 
 
-float UniversalController::getPitchExpo()
+float UniversalTransmitter::getPitchExpo()
 {
   return pitch_ch.getExpo();
 }
@@ -715,7 +715,7 @@ float UniversalController::getPitchExpo()
 
 
 
-float UniversalController::getRollExpo()
+float UniversalTransmitter::getRollExpo()
 {
   return roll_ch.getExpo();
 }
@@ -723,7 +723,7 @@ float UniversalController::getRollExpo()
 
 
 
-float UniversalController::getYawExpo()
+float UniversalTransmitter::getYawExpo()
 {
   return yaw_ch.getExpo();
 }
@@ -731,7 +731,7 @@ float UniversalController::getYawExpo()
 
 
 
-float UniversalController::getThrottleExpo()
+float UniversalTransmitter::getThrottleExpo()
 {
   return throttle_ch.getExpo();
 }
@@ -739,7 +739,7 @@ float UniversalController::getThrottleExpo()
 
 
 
-float UniversalController::getKnob1Expo()
+float UniversalTransmitter::getKnob1Expo()
 {
   return knob1_ch.getExpo();
 }
@@ -747,7 +747,7 @@ float UniversalController::getKnob1Expo()
 
 
 
-float UniversalController::getKnob2Expo()
+float UniversalTransmitter::getKnob2Expo()
 {
   return knob2_ch.getExpo();
 }
@@ -755,7 +755,7 @@ float UniversalController::getKnob2Expo()
 
 
 
-void UniversalController::setPitchMixCh(const int& chNum)
+void UniversalTransmitter::setPitchMixCh(const int& chNum)
 {
   pitch_ch.setMixChNum(chNum);
 }
@@ -763,7 +763,7 @@ void UniversalController::setPitchMixCh(const int& chNum)
 
 
 
-void UniversalController::setRollMixCh(const int& chNum)
+void UniversalTransmitter::setRollMixCh(const int& chNum)
 {
   roll_ch.setMixChNum(chNum);
 }
@@ -771,7 +771,7 @@ void UniversalController::setRollMixCh(const int& chNum)
 
 
 
-void UniversalController::setYawMixCh(const int& chNum)
+void UniversalTransmitter::setYawMixCh(const int& chNum)
 {
   yaw_ch.setMixChNum(chNum);
 }
@@ -779,7 +779,7 @@ void UniversalController::setYawMixCh(const int& chNum)
 
 
 
-void UniversalController::setThrottleMixCh(const int& chNum)
+void UniversalTransmitter::setThrottleMixCh(const int& chNum)
 {
   throttle_ch.setMixChNum(chNum);
 }
@@ -787,7 +787,7 @@ void UniversalController::setThrottleMixCh(const int& chNum)
 
 
 
-void UniversalController::setKnob1MixCh(const int& chNum)
+void UniversalTransmitter::setKnob1MixCh(const int& chNum)
 {
   knob1_ch.setMixChNum(chNum);
 }
@@ -795,7 +795,7 @@ void UniversalController::setKnob1MixCh(const int& chNum)
 
 
 
-void UniversalController::setKnob2MixCh(const int& chNum)
+void UniversalTransmitter::setKnob2MixCh(const int& chNum)
 {
   knob2_ch.setMixChNum(chNum);
 }
@@ -803,7 +803,7 @@ void UniversalController::setKnob2MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw1MixCh(const int& chNum)
+void UniversalTransmitter::setSw1MixCh(const int& chNum)
 {
   sw_1_ch.setMixChNum(chNum);
 }
@@ -811,7 +811,7 @@ void UniversalController::setSw1MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw2MixCh(const int& chNum)
+void UniversalTransmitter::setSw2MixCh(const int& chNum)
 {
   sw_2_ch.setMixChNum(chNum);
 }
@@ -819,7 +819,7 @@ void UniversalController::setSw2MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw3MixCh(const int& chNum)
+void UniversalTransmitter::setSw3MixCh(const int& chNum)
 {
   sw_3_ch.setMixChNum(chNum);
 }
@@ -827,7 +827,7 @@ void UniversalController::setSw3MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw4MixCh(const int& chNum)
+void UniversalTransmitter::setSw4MixCh(const int& chNum)
 {
   sw_4_ch.setMixChNum(chNum);
 }
@@ -835,7 +835,7 @@ void UniversalController::setSw4MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw5MixCh(const int& chNum)
+void UniversalTransmitter::setSw5MixCh(const int& chNum)
 {
   sw_5_ch.setMixChNum(chNum);
 }
@@ -843,7 +843,7 @@ void UniversalController::setSw5MixCh(const int& chNum)
 
 
 
-void UniversalController::setSw6MixCh(const int& chNum)
+void UniversalTransmitter::setSw6MixCh(const int& chNum)
 {
   sw_6_ch.setMixChNum(chNum);
 }
@@ -851,7 +851,7 @@ void UniversalController::setSw6MixCh(const int& chNum)
 
 
 
-void UniversalController::setTriSwAMixCh(const int& chNum)
+void UniversalTransmitter::setTriSwAMixCh(const int& chNum)
 {
   tri_sw_a_ch.setMixChNum(chNum);
 }
@@ -859,7 +859,7 @@ void UniversalController::setTriSwAMixCh(const int& chNum)
 
 
 
-void UniversalController::setTriSwBMixCh(const int& chNum)
+void UniversalTransmitter::setTriSwBMixCh(const int& chNum)
 {
   tri_sw_b_ch.setMixChNum(chNum);
 }
@@ -867,7 +867,7 @@ void UniversalController::setTriSwBMixCh(const int& chNum)
 
 
 
-int UniversalController::getPitchMixCh()
+int UniversalTransmitter::getPitchMixCh()
 {
   return pitch_ch.getMixChNum();
 }
@@ -875,7 +875,7 @@ int UniversalController::getPitchMixCh()
 
 
 
-int UniversalController::getRollMixCh()
+int UniversalTransmitter::getRollMixCh()
 {
   return roll_ch.getMixChNum();
 }
@@ -883,7 +883,7 @@ int UniversalController::getRollMixCh()
 
 
 
-int UniversalController::getYawMixCh()
+int UniversalTransmitter::getYawMixCh()
 {
   return yaw_ch.getMixChNum();
 }
@@ -891,7 +891,7 @@ int UniversalController::getYawMixCh()
 
 
 
-int UniversalController::getThrottleMixCh()
+int UniversalTransmitter::getThrottleMixCh()
 {
   return throttle_ch.getMixChNum();
 }
@@ -899,7 +899,7 @@ int UniversalController::getThrottleMixCh()
 
 
 
-int UniversalController::getKnob1MixCh()
+int UniversalTransmitter::getKnob1MixCh()
 {
   return knob1_ch.getMixChNum();
 }
@@ -907,7 +907,7 @@ int UniversalController::getKnob1MixCh()
 
 
 
-int UniversalController::getKnob2MixCh()
+int UniversalTransmitter::getKnob2MixCh()
 {
   return knob2_ch.getMixChNum();
 }
@@ -915,7 +915,7 @@ int UniversalController::getKnob2MixCh()
 
 
 
-int UniversalController::getSw1MixCh()
+int UniversalTransmitter::getSw1MixCh()
 {
   return sw_1_ch.getMixChNum();
 }
@@ -923,7 +923,7 @@ int UniversalController::getSw1MixCh()
 
 
 
-int UniversalController::getSw2MixCh()
+int UniversalTransmitter::getSw2MixCh()
 {
   return sw_2_ch.getMixChNum();
 }
@@ -931,7 +931,7 @@ int UniversalController::getSw2MixCh()
 
 
 
-int UniversalController::getSw3MixCh()
+int UniversalTransmitter::getSw3MixCh()
 {
   return sw_3_ch.getMixChNum();
 }
@@ -939,7 +939,7 @@ int UniversalController::getSw3MixCh()
 
 
 
-int UniversalController::getSw4MixCh()
+int UniversalTransmitter::getSw4MixCh()
 {
   return sw_4_ch.getMixChNum();
 }
@@ -947,7 +947,7 @@ int UniversalController::getSw4MixCh()
 
 
 
-int UniversalController::getSw5MixCh()
+int UniversalTransmitter::getSw5MixCh()
 {
   return sw_5_ch.getMixChNum();
 }
@@ -955,7 +955,7 @@ int UniversalController::getSw5MixCh()
 
 
 
-int UniversalController::getSw6MixCh()
+int UniversalTransmitter::getSw6MixCh()
 {
   return sw_6_ch.getMixChNum();
 }
@@ -963,7 +963,7 @@ int UniversalController::getSw6MixCh()
 
 
 
-int UniversalController::getTriSwAMixCh()
+int UniversalTransmitter::getTriSwAMixCh()
 {
   return tri_sw_a_ch.getMixChNum();
 }
@@ -971,7 +971,7 @@ int UniversalController::getTriSwAMixCh()
 
 
 
-int UniversalController::getTriSwBMixCh()
+int UniversalTransmitter::getTriSwBMixCh()
 {
   return tri_sw_b_ch.getMixChNum();
 }
@@ -979,7 +979,7 @@ int UniversalController::getTriSwBMixCh()
 
 
 
-void UniversalController::setPitchMix(const float& mix)
+void UniversalTransmitter::setPitchMix(const float& mix)
 {
   pitch_ch.setMix(mix);
 }
@@ -987,7 +987,7 @@ void UniversalController::setPitchMix(const float& mix)
 
 
 
-void UniversalController::setRollMix(const float& mix)
+void UniversalTransmitter::setRollMix(const float& mix)
 {
   roll_ch.setMix(mix);
 }
@@ -995,7 +995,7 @@ void UniversalController::setRollMix(const float& mix)
 
 
 
-void UniversalController::setYawMix(const float& mix)
+void UniversalTransmitter::setYawMix(const float& mix)
 {
   yaw_ch.setMix(mix);
 }
@@ -1003,7 +1003,7 @@ void UniversalController::setYawMix(const float& mix)
 
 
 
-void UniversalController::setThrottleMix(const float& mix)
+void UniversalTransmitter::setThrottleMix(const float& mix)
 {
   throttle_ch.setMix(mix);
 }
@@ -1011,7 +1011,7 @@ void UniversalController::setThrottleMix(const float& mix)
 
 
 
-void UniversalController::setKnob1Mix(const float& mix)
+void UniversalTransmitter::setKnob1Mix(const float& mix)
 {
   knob1_ch.setMix(mix);
 }
@@ -1019,7 +1019,7 @@ void UniversalController::setKnob1Mix(const float& mix)
 
 
 
-void UniversalController::setKnob2Mix(const float& mix)
+void UniversalTransmitter::setKnob2Mix(const float& mix)
 {
   knob2_ch.setMix(mix);
 }
@@ -1027,7 +1027,7 @@ void UniversalController::setKnob2Mix(const float& mix)
 
 
 
-void UniversalController::setSw1Mix(const float& mix)
+void UniversalTransmitter::setSw1Mix(const float& mix)
 {
   sw_1_ch.setMix(mix);
 }
@@ -1035,7 +1035,7 @@ void UniversalController::setSw1Mix(const float& mix)
 
 
 
-void UniversalController::setSw2Mix(const float& mix)
+void UniversalTransmitter::setSw2Mix(const float& mix)
 {
   sw_2_ch.setMix(mix);
 }
@@ -1043,7 +1043,7 @@ void UniversalController::setSw2Mix(const float& mix)
 
 
 
-void UniversalController::setSw3Mix(const float& mix)
+void UniversalTransmitter::setSw3Mix(const float& mix)
 {
   sw_3_ch.setMix(mix);
 }
@@ -1051,7 +1051,7 @@ void UniversalController::setSw3Mix(const float& mix)
 
 
 
-void UniversalController::setSw4Mix(const float& mix)
+void UniversalTransmitter::setSw4Mix(const float& mix)
 {
   sw_4_ch.setMix(mix);
 }
@@ -1059,7 +1059,7 @@ void UniversalController::setSw4Mix(const float& mix)
 
 
 
-void UniversalController::setSw5Mix(const float& mix)
+void UniversalTransmitter::setSw5Mix(const float& mix)
 {
   sw_5_ch.setMix(mix);
 }
@@ -1067,7 +1067,7 @@ void UniversalController::setSw5Mix(const float& mix)
 
 
 
-void UniversalController::setSw6Mix(const float& mix)
+void UniversalTransmitter::setSw6Mix(const float& mix)
 {
   sw_6_ch.setMix(mix);
 }
@@ -1075,7 +1075,7 @@ void UniversalController::setSw6Mix(const float& mix)
 
 
 
-void UniversalController::setTriSwAMix(const float& mix)
+void UniversalTransmitter::setTriSwAMix(const float& mix)
 {
   tri_sw_a_ch.setMix(mix);
 }
@@ -1083,7 +1083,7 @@ void UniversalController::setTriSwAMix(const float& mix)
 
 
 
-void UniversalController::setTriSwBMix(const float& mix)
+void UniversalTransmitter::setTriSwBMix(const float& mix)
 {
   tri_sw_b_ch.setMix(mix);
 }
@@ -1091,7 +1091,7 @@ void UniversalController::setTriSwBMix(const float& mix)
 
 
 
-int UniversalController::getPitchMix()
+int UniversalTransmitter::getPitchMix()
 {
   return pitch_ch.getMix();
 }
@@ -1099,7 +1099,7 @@ int UniversalController::getPitchMix()
 
 
 
-int UniversalController::getRollMix()
+int UniversalTransmitter::getRollMix()
 {
   return roll_ch.getMix();
 }
@@ -1107,7 +1107,7 @@ int UniversalController::getRollMix()
 
 
 
-int UniversalController::getYawMix()
+int UniversalTransmitter::getYawMix()
 {
   return yaw_ch.getMix();
 }
@@ -1115,7 +1115,7 @@ int UniversalController::getYawMix()
 
 
 
-int UniversalController::getThrottleMix()
+int UniversalTransmitter::getThrottleMix()
 {
   return throttle_ch.getMix();
 }
@@ -1123,7 +1123,7 @@ int UniversalController::getThrottleMix()
 
 
 
-int UniversalController::getKnob1Mix()
+int UniversalTransmitter::getKnob1Mix()
 {
   return knob1_ch.getMix();
 }
@@ -1131,7 +1131,7 @@ int UniversalController::getKnob1Mix()
 
 
 
-int UniversalController::getKnob2Mix()
+int UniversalTransmitter::getKnob2Mix()
 {
   return knob1_ch.getMix();
 }
@@ -1139,7 +1139,7 @@ int UniversalController::getKnob2Mix()
 
 
 
-int UniversalController::getSw1Mix()
+int UniversalTransmitter::getSw1Mix()
 {
   return sw_1_ch.getMix();
 }
@@ -1147,7 +1147,7 @@ int UniversalController::getSw1Mix()
 
 
 
-int UniversalController::getSw2Mix()
+int UniversalTransmitter::getSw2Mix()
 {
   return sw_2_ch.getMix();
 }
@@ -1155,7 +1155,7 @@ int UniversalController::getSw2Mix()
 
 
 
-int UniversalController::getSw3Mix()
+int UniversalTransmitter::getSw3Mix()
 {
   return sw_3_ch.getMix();
 }
@@ -1163,7 +1163,7 @@ int UniversalController::getSw3Mix()
 
 
 
-int UniversalController::getSw4Mix()
+int UniversalTransmitter::getSw4Mix()
 {
   return sw_4_ch.getMix();
 }
@@ -1171,7 +1171,7 @@ int UniversalController::getSw4Mix()
 
 
 
-int UniversalController::getSw5Mix()
+int UniversalTransmitter::getSw5Mix()
 {
   return sw_5_ch.getMix();
 }
@@ -1179,7 +1179,7 @@ int UniversalController::getSw5Mix()
 
 
 
-int UniversalController::getSw6Mix()
+int UniversalTransmitter::getSw6Mix()
 {
   return sw_6_ch.getMix();
 }
@@ -1187,7 +1187,7 @@ int UniversalController::getSw6Mix()
 
 
 
-int UniversalController::getTriSwAMix()
+int UniversalTransmitter::getTriSwAMix()
 {
   return tri_sw_a_ch.getMix();
 }
@@ -1195,7 +1195,7 @@ int UniversalController::getTriSwAMix()
 
 
 
-int UniversalController::getTriSwBMix()
+int UniversalTransmitter::getTriSwBMix()
 {
   return tri_sw_b_ch.getMix();
 }
@@ -1203,7 +1203,7 @@ int UniversalController::getTriSwBMix()
 
 
 
-void UniversalController::setPitchReverse(const bool& reverse)
+void UniversalTransmitter::setPitchReverse(const bool& reverse)
 {
   pitch_ch.setReverse(reverse);
 }
@@ -1211,7 +1211,7 @@ void UniversalController::setPitchReverse(const bool& reverse)
 
 
 
-void UniversalController::setRollReverse(const bool& reverse)
+void UniversalTransmitter::setRollReverse(const bool& reverse)
 {
   roll_ch.setReverse(reverse);
 }
@@ -1219,7 +1219,7 @@ void UniversalController::setRollReverse(const bool& reverse)
 
 
 
-void UniversalController::setYawReverse(const bool& reverse)
+void UniversalTransmitter::setYawReverse(const bool& reverse)
 {
   yaw_ch.setReverse(reverse);
 }
@@ -1227,7 +1227,7 @@ void UniversalController::setYawReverse(const bool& reverse)
 
 
 
-void UniversalController::setThrottleReverse(const bool& reverse)
+void UniversalTransmitter::setThrottleReverse(const bool& reverse)
 {
   throttle_ch.setReverse(reverse);
 }
@@ -1235,7 +1235,7 @@ void UniversalController::setThrottleReverse(const bool& reverse)
 
 
 
-void UniversalController::setKnob1Reverse(const bool& reverse)
+void UniversalTransmitter::setKnob1Reverse(const bool& reverse)
 {
   knob1_ch.setReverse(reverse);
 }
@@ -1243,7 +1243,7 @@ void UniversalController::setKnob1Reverse(const bool& reverse)
 
 
 
-void UniversalController::setKnob2Reverse(const bool& reverse)
+void UniversalTransmitter::setKnob2Reverse(const bool& reverse)
 {
   knob2_ch.setReverse(reverse);
 }
@@ -1251,7 +1251,7 @@ void UniversalController::setKnob2Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw1Reverse(const bool& reverse)
+void UniversalTransmitter::setSw1Reverse(const bool& reverse)
 {
   sw_1_ch.setReverse(reverse);
 }
@@ -1259,7 +1259,7 @@ void UniversalController::setSw1Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw2Reverse(const bool& reverse)
+void UniversalTransmitter::setSw2Reverse(const bool& reverse)
 {
   sw_2_ch.setReverse(reverse);
 }
@@ -1267,7 +1267,7 @@ void UniversalController::setSw2Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw3Reverse(const bool& reverse)
+void UniversalTransmitter::setSw3Reverse(const bool& reverse)
 {
   sw_3_ch.setReverse(reverse);
 }
@@ -1275,7 +1275,7 @@ void UniversalController::setSw3Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw4Reverse(const bool& reverse)
+void UniversalTransmitter::setSw4Reverse(const bool& reverse)
 {
   sw_4_ch.setReverse(reverse);
 }
@@ -1283,7 +1283,7 @@ void UniversalController::setSw4Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw5Reverse(const bool& reverse)
+void UniversalTransmitter::setSw5Reverse(const bool& reverse)
 {
   sw_5_ch.setReverse(reverse);
 }
@@ -1291,7 +1291,7 @@ void UniversalController::setSw5Reverse(const bool& reverse)
 
 
 
-void UniversalController::setSw6Reverse(const bool& reverse)
+void UniversalTransmitter::setSw6Reverse(const bool& reverse)
 {
   sw_6_ch.setReverse(reverse);
 }
@@ -1299,7 +1299,7 @@ void UniversalController::setSw6Reverse(const bool& reverse)
 
 
 
-void UniversalController::setTriSwAReverse(const bool& reverse)
+void UniversalTransmitter::setTriSwAReverse(const bool& reverse)
 {
   tri_sw_a_ch.setReverse(reverse);
 }
@@ -1307,7 +1307,7 @@ void UniversalController::setTriSwAReverse(const bool& reverse)
 
 
 
-void UniversalController::setTriSwBReverse(const bool& reverse)
+void UniversalTransmitter::setTriSwBReverse(const bool& reverse)
 {
   tri_sw_b_ch.setReverse(reverse);
 }
@@ -1315,7 +1315,7 @@ void UniversalController::setTriSwBReverse(const bool& reverse)
 
 
 
-bool UniversalController::getPitchReverse()
+bool UniversalTransmitter::getPitchReverse()
 {
   return pitch_ch.getReverse();
 }
@@ -1323,7 +1323,7 @@ bool UniversalController::getPitchReverse()
 
 
 
-bool UniversalController::getRollReverse()
+bool UniversalTransmitter::getRollReverse()
 {
   return roll_ch.getReverse();
 }
@@ -1331,7 +1331,7 @@ bool UniversalController::getRollReverse()
 
 
 
-bool UniversalController::getYawReverse()
+bool UniversalTransmitter::getYawReverse()
 {
   return yaw_ch.getReverse();
 }
@@ -1339,7 +1339,7 @@ bool UniversalController::getYawReverse()
 
 
 
-bool UniversalController::getThrottleReverse()
+bool UniversalTransmitter::getThrottleReverse()
 {
   return throttle_ch.getReverse();
 }
@@ -1347,7 +1347,7 @@ bool UniversalController::getThrottleReverse()
 
 
 
-bool UniversalController::getKnob1Reverse()
+bool UniversalTransmitter::getKnob1Reverse()
 {
   return knob1_ch.getReverse();
 }
@@ -1355,7 +1355,7 @@ bool UniversalController::getKnob1Reverse()
 
 
 
-bool UniversalController::getKnob2Reverse()
+bool UniversalTransmitter::getKnob2Reverse()
 {
   return knob2_ch.getReverse();
 }
@@ -1363,7 +1363,7 @@ bool UniversalController::getKnob2Reverse()
 
 
 
-bool UniversalController::getSw1Reverse()
+bool UniversalTransmitter::getSw1Reverse()
 {
   return sw_1_ch.getReverse();
 }
@@ -1371,7 +1371,7 @@ bool UniversalController::getSw1Reverse()
 
 
 
-bool UniversalController::getSw2Reverse()
+bool UniversalTransmitter::getSw2Reverse()
 {
   return sw_2_ch.getReverse();
 }
@@ -1379,7 +1379,7 @@ bool UniversalController::getSw2Reverse()
 
 
 
-bool UniversalController::getSw3Reverse()
+bool UniversalTransmitter::getSw3Reverse()
 {
   return sw_3_ch.getReverse();
 }
@@ -1387,7 +1387,7 @@ bool UniversalController::getSw3Reverse()
 
 
 
-bool UniversalController::getSw4Reverse()
+bool UniversalTransmitter::getSw4Reverse()
 {
   return sw_4_ch.getReverse();
 }
@@ -1395,7 +1395,7 @@ bool UniversalController::getSw4Reverse()
 
 
 
-bool UniversalController::getSw5Reverse()
+bool UniversalTransmitter::getSw5Reverse()
 {
   return sw_5_ch.getReverse();
 }
@@ -1403,7 +1403,7 @@ bool UniversalController::getSw5Reverse()
 
 
 
-bool UniversalController::getSw6Reverse()
+bool UniversalTransmitter::getSw6Reverse()
 {
   return sw_6_ch.getReverse();
 }
@@ -1411,7 +1411,7 @@ bool UniversalController::getSw6Reverse()
 
 
 
-bool UniversalController::getTriSwAReverse()
+bool UniversalTransmitter::getTriSwAReverse()
 {
   return tri_sw_a_ch.getReverse();
 }
@@ -1419,7 +1419,7 @@ bool UniversalController::getTriSwAReverse()
 
 
 
-bool UniversalController::getTriSwBReverse()
+bool UniversalTransmitter::getTriSwBReverse()
 {
   return tri_sw_b_ch.getReverse();
 }
@@ -1427,7 +1427,7 @@ bool UniversalController::getTriSwBReverse()
 
 
 
-float UniversalController::shuntVoltage()
+float UniversalTransmitter::shuntVoltage()
 {
   return shuntvoltage;
 }
@@ -1435,7 +1435,7 @@ float UniversalController::shuntVoltage()
 
 
 
-float UniversalController::busVoltage()
+float UniversalTransmitter::busVoltage()
 {
   return busvoltage;
 }
@@ -1443,7 +1443,7 @@ float UniversalController::busVoltage()
 
 
 
-float UniversalController::current()
+float UniversalTransmitter::current()
 {
   return current_mA;
 }
@@ -1451,7 +1451,7 @@ float UniversalController::current()
 
 
 
-float UniversalController::power()
+float UniversalTransmitter::power()
 {
   return power_mW;
 }
@@ -1459,7 +1459,7 @@ float UniversalController::power()
 
 
 
-float UniversalController::loadVoltage()
+float UniversalTransmitter::loadVoltage()
 {
   return loadvoltage;
 }
@@ -1467,7 +1467,7 @@ float UniversalController::loadVoltage()
 
 
 
-bool UniversalController::wasTouched()
+bool UniversalTransmitter::wasTouched()
 {
   return !touch_handled;
 }
@@ -1475,7 +1475,7 @@ bool UniversalController::wasTouched()
 
 
 
-void UniversalController::clearTouch()
+void UniversalTransmitter::clearTouch()
 {
   touch_handled = true;
 }
@@ -1483,7 +1483,7 @@ void UniversalController::clearTouch()
 
 
 
-float UniversalController::touchX()
+float UniversalTransmitter::touchX()
 {
   return ts_point.x;
 }
@@ -1491,7 +1491,7 @@ float UniversalController::touchX()
 
 
 
-float UniversalController::touchY()
+float UniversalTransmitter::touchY()
 {
   return ts_point.y;
 }
@@ -1499,7 +1499,7 @@ float UniversalController::touchY()
 
 
 
-float UniversalController::touchPressure()
+float UniversalTransmitter::touchPressure()
 {
   return ts_point.z;
 }
@@ -1507,7 +1507,7 @@ float UniversalController::touchPressure()
 
 
 
-float UniversalController::expo(const float& input, const float& expo)
+float UniversalTransmitter::expo(const float& input, const float& expo)
 {
   return applyExpo(input, expo);
 }

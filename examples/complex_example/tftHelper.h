@@ -1,7 +1,7 @@
 #pragma once
 #include "TeensyTimerTool.h"
 #include "FireTimer.h"
-#include "UniversalController.h"
+#include "UniversalTransmitter.h"
 #include "display/display.h"
 #include "radios/radios.h"
 #include "inputs/inputs.h"
@@ -43,7 +43,7 @@ const int VOLTAGE_PERIOD_MS = 30000;
 
 FireTimer voltTimer;
 PeriodicTimer menuTimer;
-extern UniversalController myController;
+extern UniversalTransmitter myController;
 
 
 

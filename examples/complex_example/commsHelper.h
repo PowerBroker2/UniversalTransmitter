@@ -1,6 +1,6 @@
 #pragma once
 #include "SerialTransfer.h"
-#include "UniversalController.h"
+#include "UniversalTransmitter.h"
 #include "radios/radios.h"
 #include "chHelper.h"
 #include "settingsHelper.h"
@@ -15,7 +15,7 @@
 
 
 SerialTransfer commsTransfer;
-extern UniversalController myController;
+extern UniversalTransmitter myController;
 
 
 

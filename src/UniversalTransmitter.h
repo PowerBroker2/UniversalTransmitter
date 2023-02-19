@@ -5,7 +5,7 @@
 
 
 
-class UniversalController
+class UniversalTransmitter
 {
 public: // <<---------------------------------------//public
 

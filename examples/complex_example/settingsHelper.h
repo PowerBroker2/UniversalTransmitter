@@ -5,7 +5,7 @@
 
 
 
-extern UniversalController myController;
+extern UniversalTransmitter myController;
 
 
 

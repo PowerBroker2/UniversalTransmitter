@@ -1,11 +1,11 @@
-#include "UniversalController.h"
+#include "UniversalTransmitter.h"
 #include "display/display.h"
 #include "radios/radios.h"
 
 
 
 
-UniversalController myController;
+UniversalTransmitter myController;
 
 
 

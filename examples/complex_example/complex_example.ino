@@ -1,4 +1,4 @@
-#include "UniversalController.h"
+#include "UniversalTransmitter.h"
 #include "chHelper.h"
 #include "tftHelper.h"
 #include "settingsHelper.h"
@@ -7,7 +7,7 @@
 
 
 
-UniversalController myController;
+UniversalTransmitter myController;
 
 
 
